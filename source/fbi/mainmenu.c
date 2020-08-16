@@ -64,5 +64,5 @@ static void mainmenu_update(ui_view* view, void* data, linked_list* items, list_
 void mainmenu_open() {
     resources_load();
 
-    list_display("Main Menu", "A: Select, START: Exit", NULL, mainmenu_update, mainmenu_draw_top);
+    list_display("主菜單", "A: 選擇, START: 退出", NULL, mainmenu_update, mainmenu_draw_top);
 }

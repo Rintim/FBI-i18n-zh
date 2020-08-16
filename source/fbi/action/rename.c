@@ -57,7 +57,7 @@ static void action_rename_onresponse(ui_view* view, void* data, SwkbdButton butt
         }
 
         if(R_SUCCEEDED(res)) {
-            if(strncmp(selected->name, "<current directory>", LIST_ITEM_NAME_MAX) != 0 && strncmp(selected->name, "<current file>", LIST_ITEM_NAME_MAX) != 0) {
+            if(strncmp(selected->name, "<當前目錄>", LIST_ITEM_NAME_MAX) != 0 && strncmp(selected->name, "<當前文件>", LIST_ITEM_NAME_MAX) != 0) {
                 string_copy(selected->name, fileName, LIST_ITEM_NAME_MAX);
             }
 

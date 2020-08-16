@@ -10,9 +10,9 @@
 #include "task/uitask.h"
 #include "../core/core.h"
 
-static list_item browse_user_save_data = {"Browse User Save Data", COLOR_TEXT, action_browse_user_ext_save_data};
-static list_item browse_spotpass_save_data = {"Browse SpotPass Save Data", COLOR_TEXT, action_browse_boss_ext_save_data};
-static list_item delete_save_data = {"Delete Save Data", COLOR_TEXT, action_delete_ext_save_data};
+static list_item browse_user_save_data = {"瀏覽使用者保存數據", COLOR_TEXT, action_browse_user_ext_save_data};
+static list_item browse_spotpass_save_data = {"瀏覽SpotPass保存數據", COLOR_TEXT, action_browse_boss_ext_save_data};
+static list_item delete_save_data = {"刪除保存數據", COLOR_TEXT, action_delete_ext_save_data};
 
 typedef struct {
     populate_ext_save_data_data populateData;
@@ -69,7 +69,7 @@ static void extsavedata_action_update(ui_view* view, void* data, linked_list* it
 static void extsavedata_action_open(linked_list* items, list_item* selected) {
     extsavedata_action_data* data = (extsavedata_action_data*) calloc(1, sizeof(extsavedata_action_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "Failed to allocate ext save data action data.");
+        error_display(NULL, NULL, "無法分配額外保存數據操作的數據.");
 
         return;
     }
@@ -77,7 +77,7 @@ static void extsavedata_action_open(linked_list* items, list_item* selected) {
     data->items = items;
     data->selected = selected;
 
-    list_display("Ext Save Data Action", "A: Select, B: Return", data, extsavedata_action_update, extsavedata_action_draw_top);
+    list_display("額外保存數據操作", "A: 選擇, B: 返回", data, extsavedata_action_update, extsavedata_action_draw_top);
 }
 
 static void extsavedata_options_add_entry(linked_list* items, const char* name, bool* val) {
@@ -135,15 +135,15 @@ static void extsavedata_options_update(ui_view* view, void* data, linked_list* i
     }
 
     if(linked_list_size(items) == 0) {
-        extsavedata_options_add_entry(items, "Show SD", &listData->showSD);
-        extsavedata_options_add_entry(items, "Show NAND", &listData->showNAND);
-        extsavedata_options_add_entry(items, "Sort by ID", &listData->sortById);
-        extsavedata_options_add_entry(items, "Sort by name", &listData->sortByName);
+        extsavedata_options_add_entry(items, "顯示SD卡", &listData->showSD);
+        extsavedata_options_add_entry(items, "顯示NAND", &listData->showNAND);
+        extsavedata_options_add_entry(items, "按ID排列", &listData->sortById);
+        extsavedata_options_add_entry(items, "按名稱排列", &listData->sortByName);
     }
 }
 
 static void extsavedata_options_open(extsavedata_data* data) {
-    list_display("Options", "A: Toggle, B: Return", data, extsavedata_options_update, NULL);
+    list_display("選項", "A: 切換, B: 返回", data, extsavedata_options_update, NULL);
 }
 
 static void extsavedata_draw_top(ui_view* view, void* data, float x1, float y1, float x2, float y2, list_item* selected) {
@@ -188,14 +188,14 @@ static void extsavedata_update(ui_view* view, void* data, linked_list* items, li
         listData->populateData.items = items;
         Result res = task_populate_ext_save_data(&listData->populateData);
         if(R_FAILED(res)) {
-            error_display_res(NULL, NULL, res, "Failed to initiate ext save data list population.");
+            error_display_res(NULL, NULL, res, "無法初始化額外保存數據列表");
         }
 
         listData->populated = true;
     }
 
     if(listData->populateData.finished && R_FAILED(listData->populateData.result)) {
-        error_display_res(NULL, NULL, listData->populateData.result, "Failed to populate ext save data list.");
+        error_display_res(NULL, NULL, listData->populateData.result, "無法填充額外保存數據列表");
 
         listData->populateData.result = 0;
     }
@@ -255,7 +255,7 @@ static int extsavedata_compare(void* data, const void* p1, const void* p2) {
 void extsavedata_open() {
     extsavedata_data* data = (extsavedata_data*) calloc(1, sizeof(extsavedata_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "Failed to allocate ext save data data.");
+        error_display(NULL, NULL, "無法分配額外保存數據數據");
 
         return;
     }
@@ -271,5 +271,7 @@ void extsavedata_open() {
     data->sortById = false;
     data->sortByName = true;
 
-    list_display("Ext Save Data", "A: Select, B: Return, X: Refresh, Select: Options", data, extsavedata_update, extsavedata_draw_top);
+    list_display("額外保存數據", "A: 選擇, B: 返回, X: 刷新, Select: 選項", data, extsavedata_update, extsavedata_draw_top);
 }
+
+// オケー
