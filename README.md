@@ -2,7 +2,7 @@
 
 FBI是壹個3DS開源應用管理器。
 
-本倉庫為FBI的繁體漢化版本
+本倉庫為FBI的繁體漢化版本。
 
 原倉庫: https://github.com/Steveice10/FBI/
 
@@ -25,9 +25,7 @@ FBI是壹個3DS開源應用管理器。
 
 ## 編譯
 
-需要 [devkitARM](http://sourceforge.net/projects/devkitpro/files/devkitARM/) 中的 3ds-curl, 3ds-zlib, 和 3ds-jansson.
-
-需要將buildtools克隆下來
+需要 [devkitARM](http://sourceforge.net/projects/devkitpro/files/devkitARM/) 中的 3ds-curl, 3ds-zlib, 和 3ds-jansson, 和Steveice10的 buildtools
 
 buildtools: https://github.com/Steveice10/buildtools
 

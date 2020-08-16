@@ -10,18 +10,18 @@
 #include "task/uitask.h"
 #include "../core/core.h"
 
-static list_item launch_title = {"Launch Title", COLOR_TEXT, action_launch_title};
-static list_item delete_title = {"Delete Title", COLOR_TEXT, action_delete_title};
-static list_item delete_title_ticket = {"Delete Title And Ticket", COLOR_TEXT, action_delete_title_ticket};
-static list_item extract_smdh = {"Extract SMDH", COLOR_TEXT, action_extract_smdh};
-static list_item import_seed = {"Import Seed", COLOR_TEXT, action_import_seed};
-static list_item browse_save_data = {"Browse Save Data", COLOR_TEXT, action_browse_title_save_data};
-static list_item import_save_data = {"Import Save Data", COLOR_TEXT, action_import_twl_save};
-static list_item export_save_data = {"Export Save Data", COLOR_TEXT, action_export_twl_save};
-static list_item erase_save_data = {"Erase Save Data", COLOR_TEXT, action_erase_twl_save};
-static list_item import_secure_value = {"Import Secure Value", COLOR_TEXT, action_import_secure_value};
-static list_item export_secure_value = {"Export Secure Value", COLOR_TEXT, action_export_secure_value};
-static list_item delete_secure_value = {"Delete Secure Value", COLOR_TEXT, action_delete_secure_value};
+static list_item launch_title = {"啟動應用", COLOR_TEXT, action_launch_title};
+static list_item delete_title = {"刪除應用", COLOR_TEXT, action_delete_title};
+static list_item delete_title_ticket = {"刪除應用和保存數據", COLOR_TEXT, action_delete_title_ticket};
+static list_item extract_smdh = {"提取SMDH", COLOR_TEXT, action_extract_smdh};
+static list_item import_seed = {"導入Seed", COLOR_TEXT, action_import_seed};
+static list_item browse_save_data = {"瀏覽存檔文件", COLOR_TEXT, action_browse_title_save_data};
+static list_item import_save_data = {"導入存檔文件", COLOR_TEXT, action_import_twl_save};
+static list_item export_save_data = {"導出存檔文件", COLOR_TEXT, action_export_twl_save};
+static list_item erase_save_data = {"清除存檔文件", COLOR_TEXT, action_erase_twl_save};
+static list_item import_secure_value = {"導入安全值", COLOR_TEXT, action_import_secure_value};
+static list_item export_secure_value = {"導出安全值", COLOR_TEXT, action_export_secure_value};
+static list_item delete_secure_value = {"刪除安全值", COLOR_TEXT, action_delete_secure_value};
 
 typedef struct {
     populate_titles_data populateData;
@@ -105,7 +105,7 @@ static void titles_action_update(ui_view* view, void* data, linked_list* items, 
 static void titles_action_open(linked_list* items, list_item* selected) {
     titles_action_data* data = (titles_action_data*) calloc(1, sizeof(titles_action_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "Failed to allocate titles action data.");
+        error_display(NULL, NULL, "無法分配應用操作數據");
 
         return;
     }
@@ -113,7 +113,7 @@ static void titles_action_open(linked_list* items, list_item* selected) {
     data->items = items;
     data->selected = selected;
 
-    list_display("Title Action", "A: Select, B: Return", data, titles_action_update, titles_action_draw_top);
+    list_display("應用操作", "A: 選擇, B: 返回", data, titles_action_update, titles_action_draw_top);
 }
 
 static void titles_options_add_entry(linked_list* items, const char* name, bool* val) {
@@ -176,17 +176,17 @@ static void titles_options_update(ui_view* view, void* data, linked_list* items,
     }
 
     if(linked_list_size(items) == 0) {
-        titles_options_add_entry(items, "Show game card", &listData->showGameCard);
-        titles_options_add_entry(items, "Show SD", &listData->showSD);
-        titles_options_add_entry(items, "Show NAND", &listData->showNAND);
-        titles_options_add_entry(items, "Sort by ID", &listData->sortById);
-        titles_options_add_entry(items, "Sort by name", &listData->sortByName);
-        titles_options_add_entry(items, "Sort by size", &listData->sortBySize);
+        titles_options_add_entry(items, "顯示遊戲卡帶", &listData->showGameCard);
+        titles_options_add_entry(items, "顯示SD卡", &listData->showSD);
+        titles_options_add_entry(items, "顯示NAND", &listData->showNAND);
+        titles_options_add_entry(items, "按ID排列", &listData->sortById);
+        titles_options_add_entry(items, "按名稱排列", &listData->sortByName);
+        titles_options_add_entry(items, "按大小排列", &listData->sortBySize);
     }
 }
 
 static void titles_options_open(titles_data* data) {
-    list_display("Options", "A: Toggle, B: Return", data, titles_options_update, NULL);
+    list_display("選項", "A: 切換, B: 返回", data, titles_options_update, NULL);
 }
 
 static void titles_draw_top(ui_view* view, void* data, float x1, float y1, float x2, float y2, list_item* selected) {
@@ -231,14 +231,14 @@ static void titles_update(ui_view* view, void* data, linked_list* items, list_it
         listData->populateData.items = items;
         Result res = task_populate_titles(&listData->populateData);
         if(R_FAILED(res)) {
-            error_display_res(NULL, NULL, res, "Failed to initiate title list population.");
+            error_display_res(NULL, NULL, res, "無法初始化應用列表");
         }
 
         listData->populated = true;
     }
 
     if(listData->populateData.finished && R_FAILED(listData->populateData.result)) {
-        error_display_res(NULL, NULL, listData->populateData.result, "Failed to populate title list.");
+        error_display_res(NULL, NULL, listData->populateData.result, "無法填充應用列表");
 
         listData->populateData.result = 0;
     }
@@ -312,7 +312,7 @@ static int titles_compare(void* data, const void* p1, const void* p2) {
 void titles_open() {
     titles_data* data = (titles_data*) calloc(1, sizeof(titles_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "Failed to allocate titles data.");
+        error_display(NULL, NULL, "無法分配應用數據.");
 
         return;
     }
@@ -330,5 +330,7 @@ void titles_open() {
     data->sortByName = true;
     data->sortBySize = false;
 
-    list_display("Titles", "A: Select, B: Return, X: Refresh, Select: Options", data, titles_update, titles_draw_top);
+    list_display("應用（Titles）", "A: 選擇, B: 返回, X: 刷新, Select: 選項", data, titles_update, titles_draw_top);
 }
+
+// オケー
