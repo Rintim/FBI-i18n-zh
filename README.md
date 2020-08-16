@@ -1,12 +1,14 @@
-# FBI
+# FBI-i18n-zh-tw
 
-FBI is an open source title manager for the 3DS.
+FBI是壹個3DS開源應用管理器。
 
-Download: https://github.com/Steveice10/FBI/releases
+本倉庫為FBI的繁體漢化版本
 
-Requires [devkitARM](http://sourceforge.net/projects/devkitpro/files/devkitARM/), along with 3ds-curl, 3ds-zlib, and 3ds-jansson from the devkitPro pacman repository, to build.
+原倉庫: https://github.com/Steveice10/FBI/
 
-# Features
+---
+
+## 特性
 
 * Browse and modify the SD card, TWL photos, TWL sounds, save data, and ext save data.
 * Export, import, and erase save data from DS cartridges.
@@ -21,10 +23,26 @@ Requires [devkitARM](http://sourceforge.net/projects/devkitpro/files/devkitARM/)
   * Dump the raw NAND image to the SD card.
   * Launch titles installed to the system.
 
-# Credit
+## 編譯
 
-Banner: Originally created by [OctopusRift](http://gbatemp.net/members/octopusrift.356526/), touched up by [Apache Thunder](https://gbatemp.net/members/apache-thunder.105648/), updated for new logo by [PabloMK7](http://gbatemp.net/members/pablomk7.345712/).
+需要 [devkitARM](http://sourceforge.net/projects/devkitpro/files/devkitARM/) 中的 3ds-curl, 3ds-zlib, 和 3ds-jansson.
 
-Logo: [PabloMK7](http://gbatemp.net/members/pablomk7.345712/)
+需要將buildtools克隆下來
 
-SPI Protocol Information: [TuxSH](https://github.com/TuxSH/) ([TWLSaveTool](https://github.com/TuxSH/TWLSaveTool))
+buildtools: https://github.com/Steveice10/buildtools
+
+```
+git clone https://github.com/Steveice10/buildtools
+make
+```
+
+
+## 感謝
+
+感謝原作者Steveice10提供FBI
+
+>Banner: Originally created by [OctopusRift](http://gbatemp.net/members/octopusrift.356526/), touched up by [Apache Thunder](https://gbatemp.net/members/apache-thunder.105648/), updated for new logo by [PabloMK7](http://gbatemp.net/members/pablomk7.345712/).
+
+>Logo: [PabloMK7](http://gbatemp.net/members/pablomk7.345712/)
+
+>SPI Protocol Information: [TuxSH](https://github.com/TuxSH/) ([TWLSaveTool](https://github.com/TuxSH/TWLSaveTool))
