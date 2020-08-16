@@ -10,7 +10,7 @@
 #include "task/uitask.h"
 #include "../core/core.h"
 
-static list_item launch_title = {"啟動應用", COLOR_TEXT, action_launch_title};
+static list_item launch_title = {"啓動應用", COLOR_TEXT, action_launch_title};
 static list_item delete_title = {"刪除應用", COLOR_TEXT, action_delete_title};
 static list_item delete_title_ticket = {"刪除應用和保存數據", COLOR_TEXT, action_delete_title_ticket};
 static list_item extract_smdh = {"提取SMDH", COLOR_TEXT, action_extract_smdh};
@@ -19,9 +19,9 @@ static list_item browse_save_data = {"瀏覽存檔文件", COLOR_TEXT, action_br
 static list_item import_save_data = {"導入存檔文件", COLOR_TEXT, action_import_twl_save};
 static list_item export_save_data = {"導出存檔文件", COLOR_TEXT, action_export_twl_save};
 static list_item erase_save_data = {"清除存檔文件", COLOR_TEXT, action_erase_twl_save};
-static list_item import_secure_value = {"導入安全值", COLOR_TEXT, action_import_secure_value};
-static list_item export_secure_value = {"導出安全值", COLOR_TEXT, action_export_secure_value};
-static list_item delete_secure_value = {"刪除安全值", COLOR_TEXT, action_delete_secure_value};
+static list_item import_secure_value = {"導入安全値", COLOR_TEXT, action_import_secure_value};
+static list_item export_secure_value = {"導出安全値", COLOR_TEXT, action_export_secure_value};
+static list_item delete_secure_value = {"刪除安全値", COLOR_TEXT, action_delete_secure_value};
 
 typedef struct {
     populate_titles_data populateData;
@@ -176,8 +176,8 @@ static void titles_options_update(ui_view* view, void* data, linked_list* items,
     }
 
     if(linked_list_size(items) == 0) {
-        titles_options_add_entry(items, "顯示遊戲卡帶", &listData->showGameCard);
-        titles_options_add_entry(items, "顯示SD卡", &listData->showSD);
+        titles_options_add_entry(items, "顯示遊戲Card", &listData->showGameCard);
+        titles_options_add_entry(items, "顯示SD Card", &listData->showSD);
         titles_options_add_entry(items, "顯示NAND", &listData->showNAND);
         titles_options_add_entry(items, "按ID排列", &listData->sortById);
         titles_options_add_entry(items, "按名稱排列", &listData->sortByName);
