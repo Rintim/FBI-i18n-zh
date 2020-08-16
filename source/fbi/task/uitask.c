@@ -98,7 +98,7 @@ void task_draw_file_info(ui_view* view, void* data, float x1, float y1, float x2
         bool needsSeparator = false;
 
         if(info->attributes & FS_ATTRIBUTE_DIRECTORY) {
-            infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "文件夾");
+            infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "資料夾");
             needsSeparator = true;
         }
 
@@ -107,7 +107,7 @@ void task_draw_file_info(ui_view* view, void* data, float x1, float y1, float x2
                 infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, ", ");
             }
 
-            infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "隐藏文件");
+            infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "隐藏檔案");
             needsSeparator = true;
         }
 
@@ -116,7 +116,7 @@ void task_draw_file_info(ui_view* view, void* data, float x1, float y1, float x2
                 infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, ", ");
             }
 
-            infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "文件");
+            infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "檔案");
             needsSeparator = true;
         }
 

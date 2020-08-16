@@ -11,7 +11,7 @@
 #include "../core/core.h"
 
 static list_item rename_opt = {"重命名", COLOR_TEXT, action_rename};
-static list_item copy = {"復制", COLOR_TEXT, NULL};
+static list_item copy = {"拷貝", COLOR_TEXT, NULL};
 static list_item paste = {"粘貼", COLOR_TEXT, action_paste_contents};
 
 static list_item delete_file = {"刪除", COLOR_TEXT, action_delete_file};
@@ -23,9 +23,9 @@ static list_item install_ticket = {"安裝ticket", COLOR_TEXT, action_install_ti
 static list_item install_and_delete_ticket = {"安裝並刪除ticket", COLOR_TEXT, action_install_ticket_delete};
 
 static list_item delete_dir = {"刪除", COLOR_TEXT, action_delete_dir};
-static list_item copy_all_contents = {"復制所有内容", COLOR_TEXT, NULL};
-static list_item delete_all_contents = {"刪除所有内容", COLOR_TEXT, action_delete_dir_contents};
-static list_item new_folder = {"新文件夾", COLOR_TEXT, action_new_folder};
+static list_item copy_all_contents = {"拷貝所有檔案", COLOR_TEXT, NULL};
+static list_item delete_all_contents = {"刪除所有檔案", COLOR_TEXT, action_delete_dir_contents};
+static list_item new_folder = {"新資料夾", COLOR_TEXT, action_new_folder};
 
 static list_item install_all_cias = {"安裝所有CIAs", COLOR_TEXT, action_install_cias};
 static list_item install_and_delete_all_cias = {"安裝並刪除所有CIAs", COLOR_TEXT, action_install_cias_delete};
@@ -107,9 +107,9 @@ static void files_action_update(ui_view* view, void* data, linked_list* items, l
 
             Result res = 0;
             if(R_SUCCEEDED(res = clipboard_set_contents(actionData->parent->archive, info->path, selected == &copy_all_contents))) {
-                prompt_display_notify("成功", selected == &copy_all_contents ? "當前文件夾的文件已復制到剪貼板上" : (info->attributes & FS_ATTRIBUTE_DIRECTORY) ? "當前文件夾文件已復制到剪貼板上" : "文件已復制到剪貼板上", COLOR_TEXT, info, task_draw_file_info, NULL);
+                prompt_display_notify("成功", selected == &copy_all_contents ? "當前資料夾的檔案已拷貝到剪貼板上" : (info->attributes & FS_ATTRIBUTE_DIRECTORY) ? "當前資料夾檔案已拷貝到剪貼板上" : "檔案已拷貝到剪貼板上", COLOR_TEXT, info, task_draw_file_info, NULL);
             } else {
-                error_display_res(info, task_draw_file_info, res, "無法復制到剪貼板上");
+                error_display_res(info, task_draw_file_info, res, "無法拷貝到剪貼板上");
             }
         } else if(selected == &install_all_cias || selected == &install_and_delete_all_cias || selected == &install_all_tickets || selected == &install_and_delete_all_tickets) {
             void (*filteredAction)(linked_list*, list_item*, bool (*)(void*, const char*, u32), void*) = action;
@@ -171,7 +171,7 @@ static void files_action_update(ui_view* view, void* data, linked_list* items, l
 static void files_action_open(linked_list* items, list_item* selected, files_data* parent) {
     files_action_data* data = (files_action_data*) calloc(1, sizeof(files_action_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "無法分配文件操作數據");
+        error_display(NULL, NULL, "無法分配檔案操作數據");
 
         return;
     }
@@ -196,7 +196,7 @@ static void files_action_open(linked_list* items, list_item* selected, files_dat
         }
     }
 
-    list_display((((file_info*) selected->data)->attributes & FS_ATTRIBUTE_DIRECTORY) ? "文件夾操作" : "文件操作", "A: 選擇, B: 返回", data, files_action_update, files_action_draw_top);
+    list_display((((file_info*) selected->data)->attributes & FS_ATTRIBUTE_DIRECTORY) ? "資料夾操作" : "檔案操作", "A: 選擇, B: 返回", data, files_action_update, files_action_draw_top);
 }
 
 static void files_options_add_entry(linked_list* items, const char* name, bool* val) {
@@ -238,9 +238,9 @@ static void files_options_update(ui_view* view, void* data, linked_list* items, 
     }
 
     if(linked_list_size(items) == 0) {
-        files_options_add_entry(items, "顯示隱藏文件", &listData->showHidden);
-        files_options_add_entry(items, "顯示文件夾", &listData->showDirectories);
-        files_options_add_entry(items, "顯示文件", &listData->showFiles);
+        files_options_add_entry(items, "顯示隱藏檔案", &listData->showHidden);
+        files_options_add_entry(items, "顯示資料夾", &listData->showDirectories);
+        files_options_add_entry(items, "顯示檔案", &listData->showFiles);
         files_options_add_entry(items, "顯示CIAs", &listData->showCias);
         files_options_add_entry(items, "顯示tickets", &listData->showTickets);
     }
@@ -270,7 +270,7 @@ static void files_repopulate(files_data* listData, linked_list* items) {
 
     Result res = task_populate_files(&listData->populateData);
     if(R_FAILED(res)) {
-        error_display_res(NULL, NULL, res, "無法初始化文件列表");
+        error_display_res(NULL, NULL, res, "無法初始化檔案列表");
     }
 
     listData->populated = true;
@@ -347,7 +347,7 @@ static void files_update(ui_view* view, void* data, linked_list* items, list_ite
     if(selected != NULL && selected->data != NULL && (selectedTouched || (hidKeysDown() & KEY_A))) {
         file_info* fileInfo = (file_info*) selected->data;
 
-        if((fileInfo->attributes & FS_ATTRIBUTE_DIRECTORY) && strncmp(selected->name, "<當前文件夾>", LIST_ITEM_NAME_MAX) != 0) {
+        if((fileInfo->attributes & FS_ATTRIBUTE_DIRECTORY) && strncmp(selected->name, "<當前資料夾>", LIST_ITEM_NAME_MAX) != 0) {
             files_navigate(listData, items, fileInfo->path);
         } else {
             files_action_open(items, selected, listData);
@@ -360,7 +360,7 @@ static void files_update(ui_view* view, void* data, linked_list* items, list_ite
     }
 
     if(listData->populateData.finished && R_FAILED(listData->populateData.result)) {
-        error_display_res(NULL, NULL, listData->populateData.result, "無法填充文件列表");
+        error_display_res(NULL, NULL, listData->populateData.result, "無法填充檔案列表");
 
         listData->populateData.result = 0;
     }
@@ -369,7 +369,7 @@ static void files_update(ui_view* view, void* data, linked_list* items, list_ite
 void files_open(FS_ArchiveID archiveId, FS_Path archivePath) {
     files_data* data = (files_data*) calloc(1, sizeof(files_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "無法分配文件數據");
+        error_display(NULL, NULL, "無法分配檔案數據");
 
         return;
     }
@@ -397,7 +397,7 @@ void files_open(FS_ArchiveID archiveId, FS_Path archivePath) {
     if(archivePath.data != NULL) {
         data->archivePath.data = calloc(1, data->archivePath.size);
         if(data->archivePath.data == NULL) {
-            error_display(NULL, NULL, "無法分配文件數據");
+            error_display(NULL, NULL, "無法分配檔案數據");
 
             files_free_data(data);
             return;
@@ -412,13 +412,13 @@ void files_open(FS_ArchiveID archiveId, FS_Path archivePath) {
 
     Result res = 0;
     if(R_FAILED(res = fs_open_archive(&data->archive, archiveId, archivePath))) {
-        error_display_res(NULL, NULL, res, "無法打開文件列表存檔");
+        error_display_res(NULL, NULL, res, "無法打開檔案列表存檔");
 
         files_free_data(data);
         return;
     }
 
-    list_display("文件", "A: 選擇, B: 返回, X: 刷新, Select: 選項", data, files_update, files_draw_top);
+    list_display("檔案", "A: 選擇, B: 返回, X: 刷新, Select: 選項", data, files_update, files_draw_top);
 }
 
 static void files_open_nand_warning_onresponse(ui_view* view, void* data, u32 response) {

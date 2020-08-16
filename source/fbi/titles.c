@@ -10,15 +10,15 @@
 #include "task/uitask.h"
 #include "../core/core.h"
 
-static list_item launch_title = {"啓動應用", COLOR_TEXT, action_launch_title};
-static list_item delete_title = {"刪除應用", COLOR_TEXT, action_delete_title};
-static list_item delete_title_ticket = {"刪除應用和保存數據", COLOR_TEXT, action_delete_title_ticket};
+static list_item launch_title = {"啓動程式", COLOR_TEXT, action_launch_title};
+static list_item delete_title = {"刪除程式", COLOR_TEXT, action_delete_title};
+static list_item delete_title_ticket = {"刪除程式和保存檔案", COLOR_TEXT, action_delete_title_ticket};
 static list_item extract_smdh = {"提取SMDH", COLOR_TEXT, action_extract_smdh};
 static list_item import_seed = {"導入Seed", COLOR_TEXT, action_import_seed};
-static list_item browse_save_data = {"瀏覽存檔文件", COLOR_TEXT, action_browse_title_save_data};
-static list_item import_save_data = {"導入存檔文件", COLOR_TEXT, action_import_twl_save};
-static list_item export_save_data = {"導出存檔文件", COLOR_TEXT, action_export_twl_save};
-static list_item erase_save_data = {"清除存檔文件", COLOR_TEXT, action_erase_twl_save};
+static list_item browse_save_data = {"瀏覽存檔", COLOR_TEXT, action_browse_title_save_data};
+static list_item import_save_data = {"導入存檔", COLOR_TEXT, action_import_twl_save};
+static list_item export_save_data = {"導出存檔", COLOR_TEXT, action_export_twl_save};
+static list_item erase_save_data = {"清除存檔", COLOR_TEXT, action_erase_twl_save};
 static list_item import_secure_value = {"導入安全値", COLOR_TEXT, action_import_secure_value};
 static list_item export_secure_value = {"導出安全値", COLOR_TEXT, action_export_secure_value};
 static list_item delete_secure_value = {"刪除安全値", COLOR_TEXT, action_delete_secure_value};
@@ -105,7 +105,7 @@ static void titles_action_update(ui_view* view, void* data, linked_list* items, 
 static void titles_action_open(linked_list* items, list_item* selected) {
     titles_action_data* data = (titles_action_data*) calloc(1, sizeof(titles_action_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "無法分配應用操作數據");
+        error_display(NULL, NULL, "無法分配程式操作數據");
 
         return;
     }
@@ -231,14 +231,14 @@ static void titles_update(ui_view* view, void* data, linked_list* items, list_it
         listData->populateData.items = items;
         Result res = task_populate_titles(&listData->populateData);
         if(R_FAILED(res)) {
-            error_display_res(NULL, NULL, res, "無法初始化應用列表");
+            error_display_res(NULL, NULL, res, "無法初始化程式列表");
         }
 
         listData->populated = true;
     }
 
     if(listData->populateData.finished && R_FAILED(listData->populateData.result)) {
-        error_display_res(NULL, NULL, listData->populateData.result, "無法填充應用列表");
+        error_display_res(NULL, NULL, listData->populateData.result, "無法填充程式列表");
 
         listData->populateData.result = 0;
     }
@@ -312,7 +312,7 @@ static int titles_compare(void* data, const void* p1, const void* p2) {
 void titles_open() {
     titles_data* data = (titles_data*) calloc(1, sizeof(titles_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "無法分配應用數據.");
+        error_display(NULL, NULL, "無法分配程式數據.");
 
         return;
     }
@@ -330,7 +330,7 @@ void titles_open() {
     data->sortByName = true;
     data->sortBySize = false;
 
-    list_display("應用（Titles）", "A: 選擇, B: 返回, X: 刷新, Select: 選項", data, titles_update, titles_draw_top);
+    list_display("程式（Titles）", "A: 選擇, B: 返回, X: 刷新, Select: 選項", data, titles_update, titles_draw_top);
 }
 
 // オケー
