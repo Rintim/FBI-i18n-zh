@@ -10,9 +10,9 @@
 #include "task/uitask.h"
 #include "../core/core.h"
 
-static list_item browse_user_save_data = {"瀏覽使用者保存數據", COLOR_TEXT, action_browse_user_ext_save_data};
-static list_item browse_spotpass_save_data = {"瀏覽SpotPass保存數據", COLOR_TEXT, action_browse_boss_ext_save_data};
-static list_item delete_save_data = {"刪除保存數據", COLOR_TEXT, action_delete_ext_save_data};
+static list_item browse_user_save_data = {"瀏覽使用者保存資料", COLOR_TEXT, action_browse_user_ext_save_data};
+static list_item browse_spotpass_save_data = {"瀏覽SpotPass保存資料", COLOR_TEXT, action_browse_boss_ext_save_data};
+static list_item delete_save_data = {"刪除保存資料", COLOR_TEXT, action_delete_ext_save_data};
 
 typedef struct {
     populate_ext_save_data_data populateData;

@@ -98,7 +98,7 @@ void task_draw_file_info(ui_view* view, void* data, float x1, float y1, float x2
         bool needsSeparator = false;
 
         if(info->attributes & FS_ATTRIBUTE_DIRECTORY) {
-            infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "文件夾");
+            infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "資料夾");
             needsSeparator = true;
         }
 
@@ -107,7 +107,7 @@ void task_draw_file_info(ui_view* view, void* data, float x1, float y1, float x2
                 infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, ", ");
             }
 
-            infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "隐藏文件");
+            infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "隠藏档案");
             needsSeparator = true;
         }
 
@@ -116,7 +116,7 @@ void task_draw_file_info(ui_view* view, void* data, float x1, float y1, float x2
                 infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, ", ");
             }
 
-            infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "文件");
+            infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "档案");
             needsSeparator = true;
         }
 
@@ -150,7 +150,7 @@ void task_draw_file_info(ui_view* view, void* data, float x1, float y1, float x2
             }
 
             infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos,
-                                    "應用ID: %016llX\n"
+                                    "程式ID: %016llX\n"
                                             "版本: %hu (%d.%d.%d)\n"
                                             "區域: %s\n"
                                             "安裝後大小: %.2f %s",
@@ -178,11 +178,11 @@ void task_draw_pending_title_info(ui_view* view, void* data, float x1, float y1,
     char infoText[512];
 
     snprintf(infoText, sizeof(infoText),
-             "待定應用ID: %016llX\n"
-                     "媒體類型: %s\n"
+             "待定程式ID: %016llX\n"
+                     "位置: %s\n"
                      "版本: %hu (%d.%d.%d)",
              info->titleId,
-             info->mediaType == MEDIATYPE_NAND ? "NAND" : info->mediaType == MEDIATYPE_SD ? "SD" : "遊戲卡帶",
+             info->mediaType == MEDIATYPE_NAND ? "NAND" : info->mediaType == MEDIATYPE_SD ? "SD" : "遊戲Card",
              info->version, (info->version >> 10) & 0x3F, (info->version >> 4) & 0x3F, info->version & 0xF);
 
     float infoWidth;
@@ -214,7 +214,7 @@ void task_draw_ticket_info(ui_view* view, void* data, float x1, float y1, float 
     if(info->loaded) {
         char infoText[512];
 
-        snprintf(infoText, sizeof(infoText), "應用ID: %016llX", info->titleId);
+        snprintf(infoText, sizeof(infoText), "程式ID: %016llX", info->titleId);
 
         float infoWidth;
         screen_get_string_size(&infoWidth, NULL, infoText, 0.5f, 0.5f);
@@ -241,14 +241,14 @@ void task_draw_title_info(ui_view* view, void* data, float x1, float y1, float x
     char infoText[512];
 
     snprintf(infoText, sizeof(infoText),
-             "應用ID: %016llX\n"
-                     "媒體類型: %s\n"
+             "程式ID: %016llX\n"
+                     "位置: %s\n"
                      "版本: %hu (%d.%d.%d)\n"
-                     "產品代碼: %s\n"
+                     "産品代碼: %s\n"
                      "區域: %s\n"
                      "大小: %.2f %s",
              info->titleId,
-             info->mediaType == MEDIATYPE_NAND ? "NAND" : info->mediaType == MEDIATYPE_SD ? "SD" : "遊戲卡帶",
+             info->mediaType == MEDIATYPE_NAND ? "NAND" : info->mediaType == MEDIATYPE_SD ? "SD" : "遊戲Card",
              info->version, (info->version >> 10) & 0x3F, (info->version >> 4) & 0x3F, info->version & 0xF,
              info->productCode,
              regionString,

@@ -411,5 +411,5 @@ const char* ui_get_display_size_units(u64 size) {
         return "KiB";
     }
 
-    return "B";
+    return "Byte";
 }

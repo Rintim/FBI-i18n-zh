@@ -16,8 +16,8 @@ int task_compare_files(void* userData, const void* p1, const void* p2) {
     list_item* info1 = (list_item*) p1;
     list_item* info2 = (list_item*) p2;
 
-    bool info1Base = strncmp(info1->name, "<當前文件夾>", LIST_ITEM_NAME_MAX) == 0 || strncmp(info1->name, "<當前文件>", LIST_ITEM_NAME_MAX) == 0;
-    bool info2Base = strncmp(info2->name, "<當前文件夾>", LIST_ITEM_NAME_MAX) == 0 || strncmp(info2->name, "<當前文件>", LIST_ITEM_NAME_MAX) == 0;
+    bool info1Base = strncmp(info1->name, "<當前資料夾>", LIST_ITEM_NAME_MAX) == 0 || strncmp(info1->name, "<當前档案>", LIST_ITEM_NAME_MAX) == 0;
+    bool info2Base = strncmp(info2->name, "<當前資料夾>", LIST_ITEM_NAME_MAX) == 0 || strncmp(info2->name, "<當前档案>", LIST_ITEM_NAME_MAX) == 0;
 
     if(info1Base && !info2Base) {
         return -1;
@@ -199,9 +199,9 @@ static void task_populate_files_thread(void* arg) {
     if(R_SUCCEEDED(res = task_create_file_item(&baseItem, data->archive, data->path, 0, false))) {
         file_info* baseInfo = (file_info*) baseItem->data;
         if(baseInfo->attributes & FS_ATTRIBUTE_DIRECTORY) {
-            string_copy(baseItem->name, "<當前文件夾>", LIST_ITEM_NAME_MAX);
+            string_copy(baseItem->name, "<當前資料夾>", LIST_ITEM_NAME_MAX);
         } else {
-            string_copy(baseItem->name, "<當前文件>", LIST_ITEM_NAME_MAX);
+            string_copy(baseItem->name, "<當前档案>", LIST_ITEM_NAME_MAX);
         }
 
         linked_list queue;

@@ -4,3 +4,5 @@ CMakeLists.txt
 
 build
 output
+
+.vscode

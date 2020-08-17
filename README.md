@@ -2,7 +2,7 @@
 
 FBI是壹個3DS開源應用管理器。
 
-本倉庫為FBI的繁體漢化版本。
+本倉庫為FBI的繁體漢化版本，部分詞匯因兼容原字庫做簡化或改詞處理。
 
 原倉庫: https://github.com/Steveice10/FBI/
 
@@ -25,9 +25,9 @@ FBI是壹個3DS開源應用管理器。
 
 ## 編譯
 
-需要 [devkitARM](http://sourceforge.net/projects/devkitpro/files/devkitARM/) 中的 3ds-curl, 3ds-zlib, 和 3ds-jansson, 和Steveice10的 buildtools
+ - 需要 [devkitARM](http://sourceforge.net/projects/devkitpro/files/devkitARM/) 中的 3ds-curl, 3ds-zlib, 和 3ds-jansson
 
-buildtools: https://github.com/Steveice10/buildtools
+ - 需要 Steveice10 的 [buildtools](https://github.com/Steveice10/buildtools)
 
 ```
 git clone https://github.com/Steveice10/buildtools
@@ -37,7 +37,9 @@ make
 
 ## 感謝
 
-感謝原作者Steveice10提供FBI
+感謝原作者 Steveice10 提供 FBI
+
+OasisAkari : 用詞修正
 
 >Banner: Originally created by [OctopusRift](http://gbatemp.net/members/octopusrift.356526/), touched up by [Apache Thunder](https://gbatemp.net/members/apache-thunder.105648/), updated for new logo by [PabloMK7](http://gbatemp.net/members/pablomk7.345712/).
 
