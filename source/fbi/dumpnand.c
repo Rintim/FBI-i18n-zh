@@ -80,7 +80,7 @@ static Result dumpnand_restore(void* data, u32 index) {
 }
 
 static bool dumpnand_error(void* data, u32 index, Result res, ui_view** errorView) {
-    *errorView = error_display_res(NULL, NULL, res, "無法備份NAND");
+    *errorView = error_display_res(NULL, NULL, res, "無法導出NAND");
     return true;
 }
 
@@ -92,7 +92,7 @@ static void dumpnand_update(ui_view* view, void* data, float* progress, char* te
         info_destroy(view);
 
         if(R_SUCCEEDED(dumpData->result)) {
-            prompt_display_notify("成功", "成功備份NAND", COLOR_TEXT, NULL, NULL, NULL);
+            prompt_display_notify("成功", "成功導出NAND", COLOR_TEXT, NULL, NULL, NULL);
         }
 
         free(dumpData);
@@ -118,9 +118,9 @@ static void dumpnand_onresponse(ui_view* view, void* data, u32 response) {
 
         Result res = task_data_op(dumpData);
         if(R_SUCCEEDED(res)) {
-            info_display("備份NAND", "按B鍵停止", true, data, dumpnand_update, NULL);
+            info_display("導出NAND", "按B鍵停止", true, data, dumpnand_update, NULL);
         } else {
-            error_display_res(NULL, NULL, res, "無法初始化備份NAND");
+            error_display_res(NULL, NULL, res, "無法初始化導出NAND");
             free(data);
         }
     } else {
@@ -131,7 +131,7 @@ static void dumpnand_onresponse(ui_view* view, void* data, u32 response) {
 void dumpnand_open() {
     data_op_data* data = (data_op_data*) calloc(1, sizeof(data_op_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "無法分配NAND備份數據");
+        error_display(NULL, NULL, "無法分配導出NAND數據");
 
         return;
     }
@@ -164,7 +164,7 @@ void dumpnand_open() {
 
     data->finished = true;
 
-    prompt_display_yes_no("確認", "是否備份原始NAND鏡像？", COLOR_TEXT, data, NULL, dumpnand_onresponse);
+    prompt_display_yes_no("確認", "是否導出原始NAND鏡像？", COLOR_TEXT, data, NULL, dumpnand_onresponse);
 }
 
 // オケー
