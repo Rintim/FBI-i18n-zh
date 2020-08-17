@@ -23,7 +23,7 @@ static list_item install_ticket = {"安裝ticket", COLOR_TEXT, action_install_ti
 static list_item install_and_delete_ticket = {"安裝並刪除ticket", COLOR_TEXT, action_install_ticket_delete};
 
 static list_item delete_dir = {"刪除", COLOR_TEXT, action_delete_dir};
-static list_item copy_all_contents = {"復制所有档案", COLOR_TEXT, NULL};
+static list_item copy_all_contents = {"拷貝所有档案", COLOR_TEXT, NULL};
 static list_item delete_all_contents = {"刪除所有档案", COLOR_TEXT, action_delete_dir_contents};
 static list_item new_folder = {"新資料夾", COLOR_TEXT, action_new_folder};
 

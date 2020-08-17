@@ -67,7 +67,7 @@ void task_draw_ext_save_data_info(ui_view* view, void* data, float x1, float y1,
     char infoText[512];
 
     snprintf(infoText, sizeof(infoText),
-             "額外保存數據ID: %016llX\n"
+             "額外儲存數據ID: %016llX\n"
                      "動態: %s",
              info->extSaveDataId,
              info->shared ? "是" : "否");
@@ -198,7 +198,7 @@ void task_draw_system_save_data_info(ui_view* view, void* data, float x1, float 
 
     char infoText[512];
 
-    snprintf(infoText, sizeof(infoText), "系統保存數據ID: %08lX", info->systemSaveDataId);
+    snprintf(infoText, sizeof(infoText), "系統儲存數據ID: %08lX", info->systemSaveDataId);
 
     float infoWidth;
     screen_get_string_size(&infoWidth, NULL, infoText, 0.5f, 0.5f);

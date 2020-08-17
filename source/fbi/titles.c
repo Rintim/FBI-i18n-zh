@@ -12,13 +12,13 @@
 
 static list_item launch_title = {"啓動程式", COLOR_TEXT, action_launch_title};
 static list_item delete_title = {"刪除程式", COLOR_TEXT, action_delete_title};
-static list_item delete_title_ticket = {"刪除程式和保存數據", COLOR_TEXT, action_delete_title_ticket};
+static list_item delete_title_ticket = {"刪除程式和儲存數據", COLOR_TEXT, action_delete_title_ticket};
 static list_item extract_smdh = {"提取SMDH", COLOR_TEXT, action_extract_smdh};
 static list_item import_seed = {"導入Seed", COLOR_TEXT, action_import_seed};
-static list_item browse_save_data = {"瀏覽保存文件", COLOR_TEXT, action_browse_title_save_data};
-static list_item import_save_data = {"導入保存文件", COLOR_TEXT, action_import_twl_save};
-static list_item export_save_data = {"導出保存文件", COLOR_TEXT, action_export_twl_save};
-static list_item erase_save_data = {"清除保存文件", COLOR_TEXT, action_erase_twl_save};
+static list_item browse_save_data = {"瀏覽儲存文件", COLOR_TEXT, action_browse_title_save_data};
+static list_item import_save_data = {"導入儲存文件", COLOR_TEXT, action_import_twl_save};
+static list_item export_save_data = {"導出儲存文件", COLOR_TEXT, action_export_twl_save};
+static list_item erase_save_data = {"清除儲存文件", COLOR_TEXT, action_erase_twl_save};
 static list_item import_secure_value = {"導入安全値", COLOR_TEXT, action_import_secure_value};
 static list_item export_secure_value = {"導出安全値", COLOR_TEXT, action_export_secure_value};
 static list_item delete_secure_value = {"刪除安全値", COLOR_TEXT, action_delete_secure_value};
