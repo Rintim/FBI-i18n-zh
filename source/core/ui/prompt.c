@@ -77,10 +77,10 @@ static const char* button_strings[32] = {
         "B",
         "Select",
         "Start",
-        "D-Pad Right",
-        "D-Pad Left",
-        "D-Pad Up",
-        "D-Pad Down",
+        "十字鍵 右",
+        "十字鍵 左",
+        "十字鍵 上",
+        "十字鍵 下",
         "R",
         "L",
         "X",
@@ -97,19 +97,19 @@ static const char* button_strings[32] = {
         "",
         "",
         "",
-        "C-Stick Right",
-        "C-Stick Left",
-        "C-Stick Up",
-        "C-Stick Down",
-        "Circle Pad Right",
-        "Circle Pad Left",
-        "Circle Pad Up",
-        "Circle Pad Down"
+        "C搖桿 右",
+        "C搖桿 左",
+        "C搖桿 上",
+        "C搖桿 下",
+        "Circle Pad 右",
+        "Circle Pad 左",
+        "Circle Pad 上",
+        "Circle Pad 下"
 };
 
 static void prompt_button_to_string(char* out, size_t size, u32 button) {
     if(button == PROMPT_BUTTON_ANY) {
-        snprintf(out, size, "Any Button");
+        snprintf(out, size, "任意鍵");
         return;
     }
 
@@ -158,7 +158,7 @@ ui_view* prompt_display_multi_choice(const char* name, const char* text, u32 col
                                                                                                                                                           void (*onResponse)(ui_view* view, void* data, u32 response)) {
     prompt_data* promptData = (prompt_data*) calloc(1, sizeof(prompt_data));
     if(promptData == NULL) {
-        error_display(NULL, NULL, "Failed to allocate prompt data.");
+        error_display(NULL, NULL, "無法分配提示數據");
 
         return NULL;
     }
@@ -197,7 +197,9 @@ ui_view* prompt_display_notify(const char* name, const char* text, u32 color, vo
 
 ui_view* prompt_display_yes_no(const char* name, const char* text, u32 color, void* data, void (*drawTop)(ui_view* view, void* data, float x1, float y1, float x2, float y2),
                                                                                           void (*onResponse)(ui_view* view, void* data, u32 response)) {
-    static const char* options[2] = {"Yes", "No"};
+    static const char* options[2] = {"是", "否"};
     static u32 optionButtons[2] = {KEY_A, KEY_B};
     return prompt_display_multi_choice(name, text, color, options, optionButtons, 2, data, drawTop, onResponse);
 }
+
+// オケー
