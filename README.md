@@ -39,7 +39,7 @@ make
 
 感謝原作者 [Steveice10](https://github.com/Steveice10) 提供 FBI
 
-[OasisAkari](https://github.com/OasisAkari)(一只火狐) : 用詞修正
+[OasisAkari](https://github.com/OasisAkari) (一只火狐) : 用詞修正
 
 [OoLaLa](https://github.com/OoLaLa-yy) : 協助漢化
 
