@@ -188,14 +188,14 @@ static void extsavedata_update(ui_view* view, void* data, linked_list* items, li
         listData->populateData.items = items;
         Result res = task_populate_ext_save_data(&listData->populateData);
         if(R_FAILED(res)) {
-            error_display_res(NULL, NULL, res, "無法初始化額外儲存數據列表");
+            error_display_res(NULL, NULL, res, "無法初始化額外儲存數據目錄");
         }
 
         listData->populated = true;
     }
 
     if(listData->populateData.finished && R_FAILED(listData->populateData.result)) {
-        error_display_res(NULL, NULL, listData->populateData.result, "無法填充額外儲存數據列表");
+        error_display_res(NULL, NULL, listData->populateData.result, "無法填充額外儲存數據目錄");
 
         listData->populateData.result = 0;
     }

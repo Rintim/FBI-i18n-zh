@@ -17,10 +17,10 @@ static list_item paste = {"粘貼", COLOR_TEXT, action_paste_contents};
 static list_item delete_file = {"刪除", COLOR_TEXT, action_delete_file};
 
 static list_item install_cia = {"安裝CIA", COLOR_TEXT, action_install_cia};
-static list_item install_and_delete_cia = {"安裝並刪除CIA", COLOR_TEXT, action_install_cia_delete};
+static list_item install_and_delete_cia = {"安裝並刪除 CIA", COLOR_TEXT, action_install_cia_delete};
 
 static list_item install_ticket = {"安裝ticket", COLOR_TEXT, action_install_ticket};
-static list_item install_and_delete_ticket = {"安裝並刪除ticket", COLOR_TEXT, action_install_ticket_delete};
+static list_item install_and_delete_ticket = {"安裝並刪除 Ticket", COLOR_TEXT, action_install_ticket_delete};
 
 static list_item delete_dir = {"刪除", COLOR_TEXT, action_delete_dir};
 static list_item copy_all_contents = {"拷貝所有档案", COLOR_TEXT, NULL};
@@ -28,12 +28,12 @@ static list_item delete_all_contents = {"刪除所有档案", COLOR_TEXT, action
 static list_item new_folder = {"新資料夾", COLOR_TEXT, action_new_folder};
 
 static list_item install_all_cias = {"安裝所有CIAs", COLOR_TEXT, action_install_cias};
-static list_item install_and_delete_all_cias = {"安裝並刪除所有CIAs", COLOR_TEXT, action_install_cias_delete};
+static list_item install_and_delete_all_cias = {"安裝並刪除所有 CIAs", COLOR_TEXT, action_install_cias_delete};
 static list_item delete_all_cias = {"刪除所有CIAs", COLOR_TEXT, action_delete_dir_cias};
 
-static list_item install_all_tickets = {"安裝所有tickets", COLOR_TEXT, action_install_tickets};
-static list_item install_and_delete_all_tickets = {"安裝並刪除所有tickets", COLOR_TEXT, action_install_tickets_delete};
-static list_item delete_all_tickets = {"刪除所有tickets", COLOR_TEXT, action_delete_dir_tickets};
+static list_item install_all_tickets = {"安裝所有 Tickets", COLOR_TEXT, action_install_tickets};
+static list_item install_and_delete_all_tickets = {"安裝並刪除所有 Tickets", COLOR_TEXT, action_install_tickets_delete};
+static list_item delete_all_tickets = {"刪除所有 Tickets", COLOR_TEXT, action_delete_dir_tickets};
 
 typedef struct {
     populate_files_data populateData;
@@ -241,8 +241,8 @@ static void files_options_update(ui_view* view, void* data, linked_list* items, 
         files_options_add_entry(items, "顯示隠藏档案", &listData->showHidden);
         files_options_add_entry(items, "顯示資料夾", &listData->showDirectories);
         files_options_add_entry(items, "顯示档案", &listData->showFiles);
-        files_options_add_entry(items, "顯示CIAs", &listData->showCias);
-        files_options_add_entry(items, "顯示tickets", &listData->showTickets);
+        files_options_add_entry(items, "顯示 CIAs", &listData->showCias);
+        files_options_add_entry(items, "顯示 Tickets", &listData->showTickets);
     }
 }
 

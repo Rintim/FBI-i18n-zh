@@ -9,8 +9,8 @@
 #include "task/uitask.h"
 #include "../core/core.h"
 
-static list_item delete_ticket = {"刪除Ticket", COLOR_TEXT, action_delete_ticket};
-static list_item delete_unused_tickets = {"刪除未使用的Tickets", COLOR_TEXT, action_delete_tickets_unused};
+static list_item delete_ticket = {"刪除 Ticket", COLOR_TEXT, action_delete_ticket};
+static list_item delete_unused_tickets = {"刪除未使用的 Tickets", COLOR_TEXT, action_delete_tickets_unused};
 
 typedef struct {
     populate_tickets_data populateData;
@@ -109,14 +109,14 @@ static void tickets_update(ui_view* view, void* data, linked_list* items, list_i
         listData->populateData.items = items;
         Result res = task_populate_tickets(&listData->populateData);
         if(R_FAILED(res)) {
-            error_display_res(NULL, NULL, res, "無法初始化 Tickets 列表");
+            error_display_res(NULL, NULL, res, "無法初始化 Tickets 目錄結構");
         }
 
         listData->populated = true;
     }
 
     if(listData->populateData.finished && R_FAILED(listData->populateData.result)) {
-        error_display_res(NULL, NULL, listData->populateData.result, "無法填充 Tickets 列表");
+        error_display_res(NULL, NULL, listData->populateData.result, "無法列舉 Tickets 目錄");
 
         listData->populateData.result = 0;
     }
@@ -139,3 +139,5 @@ void tickets_open() {
 
     list_display("Tickets", "A: 選擇, B: 返回, X: 刷新", data, tickets_update, tickets_draw_top);
 }
+
+// オケー
