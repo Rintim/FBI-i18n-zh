@@ -101,10 +101,10 @@ static const char* button_strings[32] = {
         "C搖桿 左",
         "C搖桿 上",
         "C搖桿 下",
-        "Circle Pad 右",
-        "Circle Pad 左",
-        "Circle Pad 上",
-        "Circle Pad 下"
+        "搖桿 右",
+        "搖桿 左",
+        "搖桿 上",
+        "搖桿 下"
 };
 
 static void prompt_button_to_string(char* out, size_t size, u32 button) {
