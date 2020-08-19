@@ -66,4 +66,3 @@ void action_new_folder(linked_list* items, list_item* selected) {
     kbd_display("輸入新資料夾的名字", "", SWKBD_TYPE_NORMAL, 0, SWKBD_NOTEMPTY_NOTBLANK, FILE_NAME_MAX, data, action_new_folder_onresponse);
 }
 
-無法分配新資料夾的數據
