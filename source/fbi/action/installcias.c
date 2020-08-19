@@ -180,7 +180,7 @@ static Result action_install_cias_restore(void* data, u32 index) {
 }
 
 bool action_install_cias_error(void* data, u32 index, Result res, ui_view** errorView) {
-    *errorView = error_display_res(data, action_install_cias_draw_top, res, "無法安裝 CIA 档案");
+    *errorView = error_display_res(data, action_install_cias_draw_top, res, "無法安裝3DS可導入档案");
     return true;
 }
 
@@ -238,9 +238,9 @@ static void action_install_cias_onresponse(ui_view* view, void* data, u32 respon
     if(response == PROMPT_YES) {
         Result res = task_data_op(&installData->installInfo);
         if(R_SUCCEEDED(res)) {
-            info_display("安裝 CIA(s)", "按B鍵取消", true, data, action_install_cias_update, action_install_cias_draw_top);
+            info_display("安裝 3DS可導入档案", "按B鍵取消", true, data, action_install_cias_update, action_install_cias_draw_top);
         } else {
-            error_display_res(NULL, NULL, res, "無法初始化安裝 CIA");
+            error_display_res(NULL, NULL, res, "無法初始化安裝 3DS可導入档案");
 
             action_install_cias_free_data(installData);
         }
@@ -275,7 +275,7 @@ static void action_install_cias_loading_update(ui_view* view, void* data, float*
 
             prompt_display_yes_no("確認", loadingData->message, COLOR_TEXT, loadingData->installData, action_install_cias_draw_top, action_install_cias_onresponse);
         } else {
-            error_display_res(NULL, NULL, loadingData->popData.result, "無法列舉 CIA 目錄");
+            error_display_res(NULL, NULL, loadingData->popData.result, "無法列舉3DS可導入档案目錄");
 
             action_install_cias_free_data(loadingData->installData);
         }
@@ -288,13 +288,13 @@ static void action_install_cias_loading_update(ui_view* view, void* data, float*
         svcSignalEvent(loadingData->popData.cancelEvent);
     }
 
-    snprintf(text, PROGRESS_TEXT_MAX, "獲取 CIA 目錄...");
+    snprintf(text, PROGRESS_TEXT_MAX, "獲取3DS可導入档案目錄...");
 }
 
 static void action_install_cias_internal(linked_list* items, list_item* selected, bool (*filter)(void* data, const char* name, u32 attributes), void* filterData, const char* message, bool delete) {
     install_cias_data* data = (install_cias_data*) calloc(1, sizeof(install_cias_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "無法分配 CIA 安裝數據");
+        error_display(NULL, NULL, "無法分配3DS可導入档案安裝數據");
 
         return;
     }
@@ -369,7 +369,7 @@ static void action_install_cias_internal(linked_list* items, list_item* selected
 
     Result listRes = task_populate_files(&loadingData->popData);
     if(R_FAILED(listRes)) {
-        error_display_res(NULL, NULL, listRes, "無法初始化 CIA 目錄結構");
+        error_display_res(NULL, NULL, listRes, "無法初始化3DS可導入档案目錄結構");
 
         free(loadingData);
         action_install_cias_free_data(data);
@@ -380,19 +380,19 @@ static void action_install_cias_internal(linked_list* items, list_item* selected
 }
 
 void action_install_cia(linked_list* items, list_item* selected) {
-    action_install_cias_internal(items, selected, NULL, NULL, "即將安裝所選的 CIA，是否繼續？", false);
+    action_install_cias_internal(items, selected, NULL, NULL, "即將安裝所選的3DS可導入档案，是否繼續？", false);
 }
 
 void action_install_cia_delete(linked_list* items, list_item* selected) {
-    action_install_cias_internal(items, selected, NULL, NULL, "即將安裝並刪除所選的 CIA，是否繼續？", true);
+    action_install_cias_internal(items, selected, NULL, NULL, "即將安裝並刪除所選的3DS可導入档案，是否繼續？", true);
 }
 
 void action_install_cias(linked_list* items, list_item* selected, bool (*filter)(void* data, const char* name, u32 attributes), void* filterData) {
-    action_install_cias_internal(items, selected, filter, filterData, "即將安裝資料夾中所有的 CIAs，是否繼續？", false);
+    action_install_cias_internal(items, selected, filter, filterData, "即將安裝資料夾中所有的3DS可導入档案，是否繼續？", false);
 }
 
 void action_install_cias_delete(linked_list* items, list_item* selected, bool (*filter)(void* data, const char* name, u32 attributes), void* filterData) {
-    action_install_cias_internal(items, selected, filter, filterData, "即將安裝並刪除資料夾中所有的 CIAs，是否繼續？", true);
+    action_install_cias_internal(items, selected, filter, filterData, "即將安裝並刪除資料夾中所有的3DS可導入档案，是否繼續？", true);
 }
 
 //　オケー
