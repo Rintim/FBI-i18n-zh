@@ -63,7 +63,7 @@ static Result action_delete_pending_titles_restore(void* data, u32 index) {
 }
 
 static bool action_delete_pending_titles_error(void* data, u32 index, Result res, ui_view** errorView) {
-    *errorView = error_display_res(data, action_delete_pending_titles_draw_top, res, "Failed to delete pending title.");
+    *errorView = error_display_res(data, action_delete_pending_titles_draw_top, res, "無法刪除待裝程式");
     return true;
 }
 
@@ -84,7 +84,7 @@ static void action_delete_pending_titles_update(ui_view* view, void* data, float
         info_destroy(view);
 
         if(R_SUCCEEDED(deleteData->deleteInfo.result)) {
-            prompt_display_notify("Success", "Pending title(s) deleted.", COLOR_TEXT, NULL, NULL, NULL);
+            prompt_display_notify("成功", "待裝程式已刪除", COLOR_TEXT, NULL, NULL, NULL);
         }
 
         action_delete_pending_titles_free_data(deleteData);
@@ -106,9 +106,9 @@ static void action_delete_pending_titles_onresponse(ui_view* view, void* data, u
     if(response == PROMPT_YES) {
         Result res = task_data_op(&deleteData->deleteInfo);
         if(R_SUCCEEDED(res)) {
-            info_display("Deleting Pending Title(s)", "Press B to cancel.", true, data, action_delete_pending_titles_update, action_delete_pending_titles_draw_top);
+            info_display("刪除待裝程式中", "按B鍵取消", true, data, action_delete_pending_titles_update, action_delete_pending_titles_draw_top);
         } else {
-            error_display_res(NULL, NULL, res, "Failed to initiate delete operation.");
+            error_display_res(NULL, NULL, res, "無法初始化刪除操作");
 
             action_delete_pending_titles_free_data(deleteData);
         }

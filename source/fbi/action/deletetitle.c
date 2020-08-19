@@ -32,12 +32,12 @@ static void action_delete_title_update(ui_view* view, void* data, float* progres
     info_destroy(view);
 
     if(R_FAILED(res)) {
-        error_display_res(info, task_draw_title_info, res, "Failed to delete title.");
+        error_display_res(info, task_draw_title_info, res, "無法刪除程式");
     } else {
         linked_list_remove(deleteData->items, deleteData->selected);
         task_free_title(deleteData->selected);
 
-        prompt_display_notify("Success", "Title deleted.", COLOR_TEXT, NULL, NULL, NULL);
+        prompt_display_notify("成功", "程式已刪除", COLOR_TEXT, NULL, NULL, NULL);
     }
 
     free(data);
@@ -45,7 +45,7 @@ static void action_delete_title_update(ui_view* view, void* data, float* progres
 
 static void action_delete_title_onresponse(ui_view* view, void* data, u32 response) {
     if(response == PROMPT_YES) {
-        info_display("Deleting Title", "", false, data, action_delete_title_update, action_delete_title_draw_top);
+        info_display("正在刪除程式中", "", false, data, action_delete_title_update, action_delete_title_draw_top);
     } else {
         free(data);
     }
@@ -54,7 +54,7 @@ static void action_delete_title_onresponse(ui_view* view, void* data, u32 respon
 static void action_delete_title_internal(linked_list* items, list_item* selected, const char* message, bool ticket) {
     delete_title_data* data = (delete_title_data*) calloc(1, sizeof(delete_title_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "Failed to allocate delete title data.");
+        error_display(NULL, NULL, "無法分配程式刪除數據");
 
         return;
     }
@@ -63,13 +63,13 @@ static void action_delete_title_internal(linked_list* items, list_item* selected
     data->selected = selected;
     data->ticket = ticket;
 
-    prompt_display_yes_no("Confirmation", message, COLOR_TEXT, data, action_delete_title_draw_top, action_delete_title_onresponse);
+    prompt_display_yes_no("確認", message, COLOR_TEXT, data, action_delete_title_draw_top, action_delete_title_onresponse);
 }
 
 void action_delete_title(linked_list* items, list_item* selected) {
-    action_delete_title_internal(items, selected, "Delete the selected title?", false);
+    action_delete_title_internal(items, selected, "即將刪除所選的程式，是否繼續？", false);
 }
 
 void action_delete_title_ticket(linked_list* items, list_item* selected) {
-    action_delete_title_internal(items, selected, "Delete the selected title and ticket?", true);
+    action_delete_title_internal(items, selected, "即將刪除所選的程式及憑據，是否繼續？", true);
 }

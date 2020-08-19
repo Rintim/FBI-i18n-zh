@@ -97,7 +97,7 @@ static Result action_export_twl_save_restore(void* data, u32 index) {
 }
 
 static bool action_export_twl_save_error(void* data, u32 index, Result res, ui_view** errorView) {
-    *errorView = error_display_res(((export_twl_save_data*) data)->title, task_draw_title_info, res, "Failed to export save.");
+    *errorView = error_display_res(((export_twl_save_data*) data)->title, task_draw_title_info, res, "無法導出儲存數據");
     return true;
 }
 
@@ -109,7 +109,7 @@ static void action_export_twl_save_update(ui_view* view, void* data, float* prog
         info_destroy(view);
 
         if(R_SUCCEEDED(exportData->exportInfo.result)) {
-            prompt_display_notify("Success", "Save exported.", COLOR_TEXT, exportData->title, task_draw_title_info, NULL);
+            prompt_display_notify("成功", "儲存數據已導出", COLOR_TEXT, exportData->title, task_draw_title_info, NULL);
         }
 
         free(data);
@@ -138,9 +138,9 @@ static void action_export_twl_save_onresponse(ui_view* view, void* data, u32 res
 
         Result res = task_data_op(&exportData->exportInfo);
         if(R_SUCCEEDED(res)) {
-            info_display("Exporting Save", "Press B to cancel.", true, data, action_export_twl_save_update, action_export_twl_save_draw_top);
+            info_display("正在導出儲存數據中", "按B鍵取消", true, data, action_export_twl_save_update, action_export_twl_save_draw_top);
         } else {
-            error_display_res(exportData->title, task_draw_title_info, res, "Failed to initiate save export.");
+            error_display_res(exportData->title, task_draw_title_info, res, "無法初始化導出儲存數據");
             free(data);
         }
     } else {
@@ -151,7 +151,7 @@ static void action_export_twl_save_onresponse(ui_view* view, void* data, u32 res
 void action_export_twl_save(linked_list* items, list_item* selected) {
     export_twl_save_data* data = (export_twl_save_data*) calloc(1, sizeof(export_twl_save_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "Failed to allocate export TWL save data.");
+        error_display(NULL, NULL, "無法分配導出DSi儲存數據");
 
         return;
     }
@@ -186,5 +186,5 @@ void action_export_twl_save(linked_list* items, list_item* selected) {
 
     data->exportInfo.finished = true;
 
-    prompt_display_yes_no("Confirmation", "Export the save of the selected title?", COLOR_TEXT, data, action_export_twl_save_draw_top, action_export_twl_save_onresponse);
+    prompt_display_yes_no("確認", "即將導出所選程式的儲存數據，是否繼續？", COLOR_TEXT, data, action_export_twl_save_draw_top, action_export_twl_save_onresponse);
 }

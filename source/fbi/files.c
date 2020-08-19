@@ -25,7 +25,7 @@ static list_item install_and_delete_ticket = {"安裝並刪除憑據", COLOR_TEX
 static list_item delete_dir = {"刪除", COLOR_TEXT, action_delete_dir};
 static list_item copy_all_contents = {"拷貝所有档案", COLOR_TEXT, NULL};
 static list_item delete_all_contents = {"刪除所有档案", COLOR_TEXT, action_delete_dir_contents};
-static list_item new_folder = {"新資料夾", COLOR_TEXT, action_new_folder};
+static list_item new_folder = {"新建資料夾", COLOR_TEXT, action_new_folder};
 
 static list_item install_all_cias = {"安裝所有3DS可導入档案", COLOR_TEXT, action_install_cias};
 static list_item install_and_delete_all_cias = {"安裝並刪除所有3DS可導入档案", COLOR_TEXT, action_install_cias_delete};

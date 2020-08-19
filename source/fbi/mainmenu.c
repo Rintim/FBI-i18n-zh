@@ -19,7 +19,7 @@ static list_item tickets = {"憑據", COLOR_TEXT, tickets_open};
 static list_item ext_save_data = {"追加儲存數據", COLOR_TEXT, extsavedata_open};
 static list_item system_save_data = {"系統儲存數據", COLOR_TEXT, systemsavedata_open};
 static list_item remote_install = {"遠程安裝", COLOR_TEXT, remoteinstall_open};
-static list_item update = {"升級", COLOR_TEXT, update_open};
+static list_item update = {"升級至最新（Latest Not Releases）", COLOR_TEXT, update_open};
 
 static void mainmenu_draw_top(ui_view* view, void* data, float x1, float y1, float x2, float y2, list_item* selected) {
     u32 logoWidth;

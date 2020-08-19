@@ -75,7 +75,7 @@ static Result action_erase_twl_save_restore(void* data, u32 index) {
 }
 
 static bool action_erase_twl_save_error(void* data, u32 index, Result res, ui_view** errorView) {
-    *errorView = error_display_res(((erase_twl_save_data*) data)->title, task_draw_title_info, res, "Failed to erase save.");
+    *errorView = error_display_res(((erase_twl_save_data*) data)->title, task_draw_title_info, res, "無法清楚儲存數據");
     return true;
 }
 
@@ -87,7 +87,7 @@ static void action_erase_twl_save_update(ui_view* view, void* data, float* progr
         info_destroy(view);
 
         if(R_SUCCEEDED(eraseData->eraseInfo.result)) {
-            prompt_display_notify("Success", "Save erased.", COLOR_TEXT, eraseData->title, task_draw_title_info, NULL);
+            prompt_display_notify("成功", "儲存數據已清理", COLOR_TEXT, eraseData->title, task_draw_title_info, NULL);
         }
 
         free(data);
@@ -116,9 +116,9 @@ static void action_erase_twl_save_onresponse(ui_view* view, void* data, u32 resp
 
         Result res = task_data_op(&eraseData->eraseInfo);
         if(R_SUCCEEDED(res)) {
-            info_display("Erasing Save", "Press B to cancel.", true, data, action_erase_twl_save_update, action_erase_twl_save_draw_top);
+            info_display("正在清理存儲數據中", "按B鍵取消", true, data, action_erase_twl_save_update, action_erase_twl_save_draw_top);
         } else {
-            error_display_res(eraseData->title, task_draw_title_info, res, "Failed to initiate save erase.");
+            error_display_res(eraseData->title, task_draw_title_info, res, "無法初始化清理儲存數據");
             free(data);
         }
     } else {
@@ -129,7 +129,7 @@ static void action_erase_twl_save_onresponse(ui_view* view, void* data, u32 resp
 void action_erase_twl_save(linked_list* items, list_item* selected) {
     erase_twl_save_data* data = (erase_twl_save_data*) calloc(1, sizeof(erase_twl_save_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "Failed to allocate erase TWL save data.");
+        error_display(NULL, NULL, "無法分配清理DSi儲存數據");
 
         return;
     }
@@ -164,5 +164,5 @@ void action_erase_twl_save(linked_list* items, list_item* selected) {
 
     data->eraseInfo.finished = true;
 
-    prompt_display_yes_no("Confirmation", "Erase the save of the selected title?", COLOR_TEXT, data, action_erase_twl_save_draw_top, action_erase_twl_save_onresponse);
+    prompt_display_yes_no("確認", "即將清理所選程式的儲存數據，是否繼續？", COLOR_TEXT, data, action_erase_twl_save_draw_top, action_erase_twl_save_onresponse);
 }

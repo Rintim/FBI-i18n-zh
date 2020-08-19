@@ -13,8 +13,8 @@
 static list_item launch_title = {"啓動程式", COLOR_TEXT, action_launch_title};
 static list_item delete_title = {"刪除程式", COLOR_TEXT, action_delete_title};
 static list_item delete_title_ticket = {"刪除程式和儲存數據", COLOR_TEXT, action_delete_title_ticket};
-static list_item extract_smdh = {"提取SMDH", COLOR_TEXT, action_extract_smdh};
-static list_item import_seed = {"導入Seed", COLOR_TEXT, action_import_seed};
+static list_item extract_smdh = {"提取 SMDH", COLOR_TEXT, action_extract_smdh};
+static list_item import_seed = {"導入 Seed", COLOR_TEXT, action_import_seed};
 static list_item browse_save_data = {"瀏覽儲存文件", COLOR_TEXT, action_browse_title_save_data};
 static list_item import_save_data = {"導入儲存文件", COLOR_TEXT, action_import_twl_save};
 static list_item export_save_data = {"導出儲存文件", COLOR_TEXT, action_export_twl_save};
@@ -176,10 +176,10 @@ static void titles_options_update(ui_view* view, void* data, linked_list* items,
     }
 
     if(linked_list_size(items) == 0) {
-        titles_options_add_entry(items, "顯示遊戲Card", &listData->showGameCard);
-        titles_options_add_entry(items, "顯示SD Card程式", &listData->showSD);
-        titles_options_add_entry(items, "顯示NAND程式", &listData->showNAND);
-        titles_options_add_entry(items, "按ID排列", &listData->sortById);
+        titles_options_add_entry(items, "顯示遊戲 Card", &listData->showGameCard);
+        titles_options_add_entry(items, "顯示 SD Card 程式", &listData->showSD);
+        titles_options_add_entry(items, "顯示 NAND 程式", &listData->showNAND);
+        titles_options_add_entry(items, "按 ID 排列", &listData->sortById);
         titles_options_add_entry(items, "按名稱排列", &listData->sortByName);
         titles_options_add_entry(items, "按大小排列", &listData->sortBySize);
     }
@@ -231,14 +231,14 @@ static void titles_update(ui_view* view, void* data, linked_list* items, list_it
         listData->populateData.items = items;
         Result res = task_populate_titles(&listData->populateData);
         if(R_FAILED(res)) {
-            error_display_res(NULL, NULL, res, "無法初始化程式列表");
+            error_display_res(NULL, NULL, res, "無法初始化程式目錄結構");
         }
 
         listData->populated = true;
     }
 
     if(listData->populateData.finished && R_FAILED(listData->populateData.result)) {
-        error_display_res(NULL, NULL, listData->populateData.result, "無法填充程式列表");
+        error_display_res(NULL, NULL, listData->populateData.result, "無法列舉程式目錄");
 
         listData->populateData.result = 0;
     }
