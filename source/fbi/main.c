@@ -120,19 +120,19 @@ void init() {
 
     Result romfsRes = romfsInit();
     if(R_FAILED(romfsRes)) {
-        error_panic("Failed to mount RomFS: %08lX", romfsRes);
+        error_panic("無法掛載 RomFS: %08lX", romfsRes);
         return;
     }
 
     if(R_FAILED(init_services())) {
         if(!attempt_patch_pid()) {
-            error_panic("Kernel backdoor not installed.\nPlease run a kernel exploit and try again.");
+            error_panic("無法操控內核\n請確認已獲得內核權限");
             return;
         }
 
         Result initRes = init_services();
         if(R_FAILED(initRes)) {
-            error_panic("Failed to initialize services: %08lX", initRes);
+            error_panic("無法初始化服務: %08lX", initRes);
             return;
         }
     }
@@ -142,7 +142,7 @@ void init() {
     APT_GetAppCpuTimeLimit(&old_time_limit);
     Result cpuRes = APT_SetAppCpuTimeLimit(30);
     if(R_FAILED(cpuRes)) {
-        error_panic("Failed to set syscore CPU time limit: %08lX", cpuRes);
+        error_panic("無法設置 Syscore CPU 時間限制: %08lX", cpuRes);
         return;
     }
 

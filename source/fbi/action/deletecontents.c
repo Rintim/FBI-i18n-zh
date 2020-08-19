@@ -163,7 +163,7 @@ static void action_delete_loading_update(ui_view* view, void* data, float* progr
 
             prompt_display_yes_no("確認", loadingData->message, COLOR_TEXT, loadingData->deleteData, action_delete_draw_top, action_delete_onresponse);
         } else {
-            error_display_res(NULL, NULL, loadingData->popData.result, "無法填充档案列表");
+            error_display_res(NULL, NULL, loadingData->popData.result, "無法列舉档案列表");
 
             action_delete_free_data(loadingData->deleteData);
         }

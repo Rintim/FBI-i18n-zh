@@ -67,7 +67,7 @@ void task_draw_ext_save_data_info(ui_view* view, void* data, float x1, float y1,
     char infoText[512];
 
     snprintf(infoText, sizeof(infoText),
-             "額外儲存數據ID: %016llX\n"
+             "額外儲存數據 ID: %016llX\n"
                      "動態: %s",
              info->extSaveDataId,
              info->shared ? "是" : "否");
@@ -150,7 +150,7 @@ void task_draw_file_info(ui_view* view, void* data, float x1, float y1, float x2
             }
 
             infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos,
-                                    "程式ID: %016llX\n"
+                                    "程式 ID: %016llX\n"
                                             "版本: %hu (%d.%d.%d)\n"
                                             "區域: %s\n"
                                             "安裝後大小: %.2f %s",
@@ -160,7 +160,7 @@ void task_draw_file_info(ui_view* view, void* data, float x1, float y1, float x2
                                     ui_get_display_size(info->ciaInfo.installedSize),
                                     ui_get_display_size_units(info->ciaInfo.installedSize));
         } else if(info->isTicket && info->ticketInfo.loaded) {
-            infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "數據ID: %016llX", info->ticketInfo.titleId);
+            infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "數據 ID: %016llX", info->ticketInfo.titleId);
         }
     }
 
@@ -178,11 +178,11 @@ void task_draw_pending_title_info(ui_view* view, void* data, float x1, float y1,
     char infoText[512];
 
     snprintf(infoText, sizeof(infoText),
-             "待定程式ID: %016llX\n"
+             "待裝程式 ID: %016llX\n"
                      "位置: %s\n"
                      "版本: %hu (%d.%d.%d)",
              info->titleId,
-             info->mediaType == MEDIATYPE_NAND ? "NAND" : info->mediaType == MEDIATYPE_SD ? "SD" : "遊戲Card",
+             info->mediaType == MEDIATYPE_NAND ? "NAND" : info->mediaType == MEDIATYPE_SD ? "SD Card" : "遊戲 Card",
              info->version, (info->version >> 10) & 0x3F, (info->version >> 4) & 0x3F, info->version & 0xF);
 
     float infoWidth;
@@ -198,7 +198,7 @@ void task_draw_system_save_data_info(ui_view* view, void* data, float x1, float 
 
     char infoText[512];
 
-    snprintf(infoText, sizeof(infoText), "系統儲存數據ID: %08lX", info->systemSaveDataId);
+    snprintf(infoText, sizeof(infoText), "系統儲存數據 ID: %08lX", info->systemSaveDataId);
 
     float infoWidth;
     screen_get_string_size(&infoWidth, NULL, infoText, 0.5f, 0.5f);
@@ -214,7 +214,7 @@ void task_draw_ticket_info(ui_view* view, void* data, float x1, float y1, float 
     if(info->loaded) {
         char infoText[512];
 
-        snprintf(infoText, sizeof(infoText), "程式ID: %016llX", info->titleId);
+        snprintf(infoText, sizeof(infoText), "程式 ID: %016llX", info->titleId);
 
         float infoWidth;
         screen_get_string_size(&infoWidth, NULL, infoText, 0.5f, 0.5f);
@@ -241,14 +241,14 @@ void task_draw_title_info(ui_view* view, void* data, float x1, float y1, float x
     char infoText[512];
 
     snprintf(infoText, sizeof(infoText),
-             "程式ID: %016llX\n"
+             "程式 ID: %016llX\n"
                      "位置: %s\n"
                      "版本: %hu (%d.%d.%d)\n"
                      "産品代碼: %s\n"
                      "區域: %s\n"
                      "大小: %.2f %s",
              info->titleId,
-             info->mediaType == MEDIATYPE_NAND ? "NAND" : info->mediaType == MEDIATYPE_SD ? "SD" : "遊戲Card",
+             info->mediaType == MEDIATYPE_NAND ? "NAND" : info->mediaType == MEDIATYPE_SD ? "SD Card" : "遊戲 Card",
              info->version, (info->version >> 10) & 0x3F, (info->version >> 4) & 0x3F, info->version & 0xF,
              info->productCode,
              regionString,

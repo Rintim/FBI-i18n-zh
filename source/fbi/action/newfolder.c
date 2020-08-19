@@ -43,9 +43,9 @@ static void action_new_folder_onresponse(ui_view* view, void* data, SwkbdButton 
                 linked_list_sort(newFolderData->items, NULL, task_compare_files);
             }
 
-            prompt_display_notify("Success", "Folder created.", COLOR_TEXT, NULL, NULL, NULL);
+            prompt_display_notify("成功", "已創建新的資料夾", COLOR_TEXT, NULL, NULL, NULL);
         } else {
-            error_display_res(NULL, NULL, res, "Failed to create folder.");
+            error_display_res(NULL, NULL, res, "無法創建新的資料夾");
         }
     }
 
@@ -55,7 +55,7 @@ static void action_new_folder_onresponse(ui_view* view, void* data, SwkbdButton 
 void action_new_folder(linked_list* items, list_item* selected) {
     new_folder_data* data = (new_folder_data*) calloc(1, sizeof(new_folder_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "Failed to allocate new folder data.");
+        error_display(NULL, NULL, "無法分配新資料夾的數據");
 
         return;
     }
@@ -63,5 +63,7 @@ void action_new_folder(linked_list* items, list_item* selected) {
     data->items = items;
     data->selected = selected;
 
-    kbd_display("Enter folder name", "", SWKBD_TYPE_NORMAL, 0, SWKBD_NOTEMPTY_NOTBLANK, FILE_NAME_MAX, data, action_new_folder_onresponse);
+    kbd_display("輸入新資料夾的名字", "", SWKBD_TYPE_NORMAL, 0, SWKBD_NOTEMPTY_NOTBLANK, FILE_NAME_MAX, data, action_new_folder_onresponse);
 }
+
+無法分配新資料夾的數據
