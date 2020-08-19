@@ -69,7 +69,7 @@ static void update_check_update(ui_view* view, void* data, float* progress, char
         action_install_url("升級 FBI 到最新版本嗎？", updateURL, fs_get_3dsx_path(), NULL, NULL, NULL, NULL);
     } else {
         if(R_FAILED(res)) {
-            error_display_res(NULL, NULL, res, "無法連接服務器查詢");
+            error_display_res(NULL, NULL, res, "無法連接伺服器");
         } else {
             prompt_display_notify("成功", "已完成升級", COLOR_TEXT, NULL, NULL, NULL);
         }

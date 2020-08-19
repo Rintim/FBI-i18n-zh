@@ -214,7 +214,7 @@ void task_draw_ticket_info(ui_view* view, void* data, float x1, float y1, float 
     if(info->loaded) {
         char infoText[512];
 
-        snprintf(infoText, sizeof(infoText), "程式 ID: %016llX", info->titleId);
+        snprintf(infoText, sizeof(infoText), "憑據 ID: %016llX", info->titleId);
 
         float infoWidth;
         screen_get_string_size(&infoWidth, NULL, infoText, 0.5f, 0.5f);
