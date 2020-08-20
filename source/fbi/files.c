@@ -270,7 +270,7 @@ static void files_repopulate(files_data* listData, linked_list* items) {
 
     Result res = task_populate_files(&listData->populateData);
     if(R_FAILED(res)) {
-        error_display_res(NULL, NULL, res, "無法初始化档案列表");
+        error_display_res(NULL, NULL, res, "無法初始化档案目錄結構");
     }
 
     listData->populated = true;
@@ -360,7 +360,7 @@ static void files_update(ui_view* view, void* data, linked_list* items, list_ite
     }
 
     if(listData->populateData.finished && R_FAILED(listData->populateData.result)) {
-        error_display_res(NULL, NULL, listData->populateData.result, "無法填充档案列表");
+        error_display_res(NULL, NULL, listData->populateData.result, "無法列舉档案目錄");
 
         listData->populateData.result = 0;
     }
