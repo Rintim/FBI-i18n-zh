@@ -66,7 +66,7 @@ static void update_check_update(ui_view* view, void* data, float* progress, char
     info_destroy(view);
 
     if(hasUpdate) {
-        action_install_url("升級 FBI 到最新版本嗎？", updateURL, fs_get_3dsx_path(), NULL, NULL, NULL, NULL);
+        action_install_url("即將升級 FBI 到最新版本，是否繼續？", updateURL, fs_get_3dsx_path(), NULL, NULL, NULL, NULL);
     } else {
         if(R_FAILED(res)) {
             error_display_res(NULL, NULL, res, "無法連接伺服器");
