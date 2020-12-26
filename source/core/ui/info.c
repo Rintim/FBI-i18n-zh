@@ -72,7 +72,7 @@ ui_view* info_display(const char* name, const char* info, bool bar, void* data, 
                                                                                 void (*drawTop)(ui_view* view, void* data, float x1, float y1, float x2, float y2)) {
     info_data* infoData = (info_data*) calloc(1, sizeof(info_data));
     if(infoData == NULL) {
-        error_display(NULL, NULL, "Failed to allocate info data.");
+        error_display(NULL, NULL, "无法分配信息的数据.");
 
         return NULL;
     }
@@ -80,7 +80,7 @@ ui_view* info_display(const char* name, const char* info, bool bar, void* data, 
     infoData->bar = bar;
     infoData->data = data;
     infoData->progress = 0;
-    snprintf(infoData->text, PROGRESS_TEXT_MAX, "Please wait...");
+    snprintf(infoData->text, PROGRESS_TEXT_MAX, "请稍等...");
     infoData->update = update;
     infoData->drawTop = drawTop;
 

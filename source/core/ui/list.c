@@ -268,7 +268,7 @@ ui_view* list_display(const char* name, const char* info, void* data, void (*upd
                                                                       void (*drawTop)(ui_view* view, void* data, float x1, float y1, float x2, float y2, list_item* selected)) {
     list_data* listData = (list_data*) calloc(1, sizeof(list_data));
     if(listData == NULL) {
-        error_display(NULL, NULL, "Failed to allocate list data.");
+        error_display(NULL, NULL, "无法分配列表的数据.");
 
         return NULL;
     }

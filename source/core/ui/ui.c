@@ -42,13 +42,13 @@ void ui_exit() {
 ui_view* ui_create() {
     ui_view* view = (ui_view*) calloc(1, sizeof(ui_view));
     if(view == NULL) {
-        error_panic("Failed to allocate UI view.");
+        error_panic("无法分配 UI 的视图.");
         return NULL;
     }
 
     Result res = 0;
     if(R_FAILED(res = svcCreateEvent(&view->active, RESET_STICKY))) {
-        error_panic("Failed to create view active event: 0x%08lX", res);
+        error_panic("无法创建视图活动事件: 0x%08lX", res);
 
         free(view);
         return NULL;
@@ -212,7 +212,7 @@ static void ui_draw_top(ui_view* ui) {
             }
 
             u64 size = (u64) resource.freeClusters * (u64) resource.clusterSize;
-            snprintf(currBuffer, sizeof(ui_free_space_buffer) - (currBuffer - ui_free_space_buffer), "SD: %.1f %s",
+            snprintf(currBuffer, sizeof(ui_free_space_buffer) - (currBuffer - ui_free_space_buffer), "SD 卡: %.1f %s",
                      ui_get_display_size(size), ui_get_display_size_units(size));
             currBuffer += strlen(currBuffer);
         }
@@ -248,7 +248,7 @@ static void ui_draw_top(ui_view* ui) {
             }
 
             u64 size = (u64) resource.freeClusters * (u64) resource.clusterSize;
-            snprintf(currBuffer, sizeof(ui_free_space_buffer) - (currBuffer - ui_free_space_buffer), "TWL Photo: %.1f %s",
+            snprintf(currBuffer, sizeof(ui_free_space_buffer) - (currBuffer - ui_free_space_buffer), "TWL 照片: %.1f %s",
                      ui_get_display_size(size), ui_get_display_size_units(size));
             currBuffer += strlen(currBuffer);
         }
@@ -411,5 +411,5 @@ const char* ui_get_display_size_units(u64 size) {
         return "KiB";
     }
 
-    return "Byte";
+    return "B";
 }

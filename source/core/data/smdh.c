@@ -10,12 +10,12 @@
 
 static const char* smdh_region_strings[SMDH_NUM_REGIONS] = {
         "日本",
-        "北美洲",
-        "歐洲",
-        "澳大利亞",
-        "中國",
-        "韓國",
-        "中國臺灣"
+        "美国",
+        "欧洲",
+        "澳大利亚",
+        "中国",
+        "韩国",
+        "台湾"
 };
 
 void smdh_region_to_string(char* out, u32 region, size_t size) {
@@ -26,7 +26,7 @@ void smdh_region_to_string(char* out, u32 region, size_t size) {
     if(region == 0) {
         snprintf(out, size, "未知");
     } else if((region & SMDH_ALL_REGIONS) == SMDH_ALL_REGIONS) {
-        snprintf(out, size, "全區");
+        snprintf(out, size, "无");
     } else {
         size_t pos = 0;
 
@@ -71,5 +71,3 @@ SMDH_title* smdh_select_title(SMDH* smdh) {
 
     return &smdh->titles[systemLanguage];
 }
-
-//　オケー
