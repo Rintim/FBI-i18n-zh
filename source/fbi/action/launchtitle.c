@@ -21,16 +21,16 @@ static void action_launch_title_update(ui_view* view, void* data, float* progres
         ui_pop();
         info_destroy(view);
 
-        error_display_res(info, task_draw_title_info, res, "無法啟動程式");
+        error_display_res(info, task_draw_title_info, res, "无法启动应用.");
     }
 }
 
 static void action_launch_title_onresponse(ui_view* view, void* data, u32 response) {
     if(response == PROMPT_YES) {
-        info_display("正在啟動程式中", "", false, data, action_launch_title_update, task_draw_title_info);
+        info_display("正在启动", "", false, data, action_launch_title_update, task_draw_title_info);
     }
 }
 
 void action_launch_title(linked_list* items, list_item* selected) {
-    prompt_display_yes_no("確認", "即將啟動所選的程式，是否繼續？", COLOR_TEXT, selected->data, task_draw_title_info, action_launch_title_onresponse);
+    prompt_display_yes_no("确认", "启动所选应用?", COLOR_TEXT, selected->data, task_draw_title_info, action_launch_title_onresponse);
 }

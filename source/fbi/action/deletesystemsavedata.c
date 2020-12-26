@@ -28,12 +28,12 @@ static void action_delete_system_save_data_update(ui_view* view, void* data, flo
     info_destroy(view);
 
     if(R_FAILED(res)) {
-        error_display_res(info, task_draw_system_save_data_info, res, "Failed to delete 系統儲存數據");
+        error_display_res(info, task_draw_system_save_data_info, res, "无法删除系统数据.");
     } else {
         linked_list_remove(deleteData->items, deleteData->selected);
         task_free_system_save_data(deleteData->selected);
 
-        prompt_display_notify("成功", "系統儲存數據已刪除", COLOR_TEXT, NULL, NULL, NULL);
+        prompt_display_notify("成功", "已删除.", COLOR_TEXT, NULL, NULL, NULL);
     }
 
     free(data);
@@ -41,7 +41,7 @@ static void action_delete_system_save_data_update(ui_view* view, void* data, flo
 
 static void action_delete_system_save_data_onresponse(ui_view* view, void* data, u32 response) {
     if(response == PROMPT_YES) {
-        info_display("正在刪除系統儲存數據中", "", false, data, action_delete_system_save_data_update, action_delete_system_save_data_draw_top);
+        info_display("正在删除", "", false, data, action_delete_system_save_data_update, action_delete_system_save_data_draw_top);
     } else {
         free(data);
     }
@@ -50,7 +50,7 @@ static void action_delete_system_save_data_onresponse(ui_view* view, void* data,
 void action_delete_system_save_data(linked_list* items, list_item* selected) {
     delete_system_save_data_data* data = (delete_system_save_data_data*) calloc(1, sizeof(delete_system_save_data_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "無法分配刪除系統儲存數據的數據");
+        error_display(NULL, NULL, "无法分配删除系统数据的数据.");
 
         return;
     }
@@ -58,5 +58,5 @@ void action_delete_system_save_data(linked_list* items, list_item* selected) {
     data->items = items;
     data->selected = selected;
 
-    prompt_display_yes_no("確認", "即將刪除選定的系統儲存數據，是否繼續？", COLOR_TEXT, data, action_delete_system_save_data_draw_top, action_delete_system_save_data_onresponse);
+    prompt_display_yes_no("确认", "删除所选系统数据?", COLOR_TEXT, data, action_delete_system_save_data_draw_top, action_delete_system_save_data_onresponse);
 }

@@ -83,7 +83,7 @@ static Result action_import_twl_save_restore(void* data, u32 index) {
 }
 
 static bool action_import_twl_save_error(void* data, u32 index, Result res, ui_view** errorView) {
-    *errorView = error_display_res(((import_twl_save_data*) data)->title, task_draw_title_info, res, "無法導入儲存數據");
+    *errorView = error_display_res(((import_twl_save_data*) data)->title, task_draw_title_info, res, "无法导入数据.");
     return true;
 }
 
@@ -95,7 +95,7 @@ static void action_import_twl_save_update(ui_view* view, void* data, float* prog
         info_destroy(view);
 
         if(R_SUCCEEDED(importData->importInfo.result)) {
-            prompt_display_notify("成功", "已導入儲存數據", COLOR_TEXT, importData->title, task_draw_title_info, NULL);
+            prompt_display_notify("成功", "已导入.", COLOR_TEXT, importData->title, task_draw_title_info, NULL);
         }
 
         free(data);
@@ -124,9 +124,9 @@ static void action_import_twl_save_onresponse(ui_view* view, void* data, u32 res
 
         Result res = task_data_op(&importData->importInfo);
         if(R_SUCCEEDED(res)) {
-            info_display("正在導入儲存數據中", "按B鍵取消", true, data, action_import_twl_save_update, action_import_twl_save_draw_top);
+            info_display("正在导入", "按 B 取消.", true, data, action_import_twl_save_update, action_import_twl_save_draw_top);
         } else {
-            error_display_res(importData->title, task_draw_title_info, res, "無法初始化儲存數據導入");
+            error_display_res(importData->title, task_draw_title_info, res, "无法启动导入数据.");
             free(data);
         }
     } else {
@@ -137,7 +137,7 @@ static void action_import_twl_save_onresponse(ui_view* view, void* data, u32 res
 void action_import_twl_save(linked_list* items, list_item* selected) {
     import_twl_save_data* data = (import_twl_save_data*) calloc(1, sizeof(import_twl_save_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "無法分配DSi儲存數據導入");
+        error_display(NULL, NULL, "无法分配导入 TWL 数据的数据.");
 
         return;
     }
@@ -172,5 +172,5 @@ void action_import_twl_save(linked_list* items, list_item* selected) {
 
     data->importInfo.finished = true;
 
-    prompt_display_yes_no("確認", "即將導入所選儲存數據到所選程式中，是否繼續？", COLOR_TEXT, data, action_import_twl_save_draw_top, action_import_twl_save_onresponse);
+    prompt_display_yes_no("确认", "导入数据至所选应用?", COLOR_TEXT, data, action_import_twl_save_draw_top, action_import_twl_save_onresponse);
 }

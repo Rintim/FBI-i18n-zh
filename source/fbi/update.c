@@ -18,7 +18,7 @@ static void update_check_update(ui_view* view, void* data, float* progress, char
     Result res = 0;
 
     json_t* json = NULL;
-    if(R_SUCCEEDED(res = http_download_json("https://api.github.com/repos/Rintim/FBI-i18n-zh-tw/releases/latest", &json, 16 * 1024))) {
+    if(R_SUCCEEDED(res = http_download_json("https://api.github.com/repos/qianxu2001/fbi-i18n-zh-cn/releases/latest", &json, 16 * 1024))) {
         if(json_is_object(json)) {
             json_t* name = json_object_get(json, "name");
             json_t* assets = json_object_get(json, "assets");
@@ -66,16 +66,16 @@ static void update_check_update(ui_view* view, void* data, float* progress, char
     info_destroy(view);
 
     if(hasUpdate) {
-        action_install_url("即將升級 FBI 到最新版本，是否繼續？", updateURL, fs_get_3dsx_path(), NULL, NULL, NULL, NULL);
+        action_install_url("更新 FBI 至最新版本?", updateURL, fs_get_3dsx_path(), NULL, NULL, NULL, NULL);
     } else {
         if(R_FAILED(res)) {
-            error_display_res(NULL, NULL, res, "無法連接伺服器");
+            error_display_res(NULL, NULL, res, "无法检查更新.");
         } else {
-            prompt_display_notify("成功", "已完成升級", COLOR_TEXT, NULL, NULL, NULL);
+            prompt_display_notify("成功", "无可用的更新.", COLOR_TEXT, NULL, NULL, NULL);
         }
     }
 }
 
 void update_open() {
-    info_display("檢查升級", "", false, NULL, update_check_update, NULL);
+    info_display("正在检查更新", "", false, NULL, update_check_update, NULL);
 }

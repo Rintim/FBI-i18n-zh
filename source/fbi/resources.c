@@ -25,7 +25,7 @@ static FILE* resources_open_file(const char* path) {
 static void resources_load_texture(u32 id, const char* name) {
     FILE* fd = resources_open_file(name);
     if(fd == NULL) {
-        error_panic("無法打開 texture \"%s\": %s\n", name, strerror(errno));
+        error_panic("无法打开纹理 \"%s\": %s\n", name, strerror(errno));
         return;
     }
 
@@ -37,7 +37,7 @@ static void resources_load_texture(u32 id, const char* name) {
 void resources_load() {
     FILE* fd = resources_open_file("textcolor.cfg");
     if(fd == NULL) {
-        error_panic("無法打開文字顏色配置: %s\n", strerror(errno));
+        error_panic("无法打开文本颜色配置: %s\n", strerror(errno));
         return;
     }
 

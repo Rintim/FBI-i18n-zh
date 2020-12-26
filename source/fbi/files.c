@@ -11,29 +11,29 @@
 #include "../core/core.h"
 
 static list_item rename_opt = {"重命名", COLOR_TEXT, action_rename};
-static list_item copy = {"拷貝", COLOR_TEXT, NULL};
-static list_item paste = {"粘貼", COLOR_TEXT, action_paste_contents};
+static list_item copy = {"复制", COLOR_TEXT, NULL};
+static list_item paste = {"粘贴", COLOR_TEXT, action_paste_contents};
 
-static list_item delete_file = {"刪除", COLOR_TEXT, action_delete_file};
+static list_item delete_file = {"删除", COLOR_TEXT, action_delete_file};
 
-static list_item install_cia = {"安裝3DS可導入档案", COLOR_TEXT, action_install_cia};
-static list_item install_and_delete_cia = {"安裝並刪除3DS可導入档案", COLOR_TEXT, action_install_cia_delete};
+static list_item install_cia = {"安装安装包", COLOR_TEXT, action_install_cia};
+static list_item install_and_delete_cia = {"安装并删除安装包", COLOR_TEXT, action_install_cia_delete};
 
-static list_item install_ticket = {"安裝ticket", COLOR_TEXT, action_install_ticket};
-static list_item install_and_delete_ticket = {"安裝並刪除憑據", COLOR_TEXT, action_install_ticket_delete};
+static list_item install_ticket = {"安装应用引导表", COLOR_TEXT, action_install_ticket};
+static list_item install_and_delete_ticket = {"安装并删除应用引导表", COLOR_TEXT, action_install_ticket_delete};
 
-static list_item delete_dir = {"刪除", COLOR_TEXT, action_delete_dir};
-static list_item copy_all_contents = {"拷貝所有档案", COLOR_TEXT, NULL};
-static list_item delete_all_contents = {"刪除所有档案", COLOR_TEXT, action_delete_dir_contents};
-static list_item new_folder = {"新建資料夾", COLOR_TEXT, action_new_folder};
+static list_item delete_dir = {"删除", COLOR_TEXT, action_delete_dir};
+static list_item copy_all_contents = {"复制所有项目", COLOR_TEXT, NULL};
+static list_item delete_all_contents = {"删除所有项目", COLOR_TEXT, action_delete_dir_contents};
+static list_item new_folder = {"新建文件夹", COLOR_TEXT, action_new_folder};
 
-static list_item install_all_cias = {"安裝所有3DS可導入档案", COLOR_TEXT, action_install_cias};
-static list_item install_and_delete_all_cias = {"安裝並刪除所有3DS可導入档案", COLOR_TEXT, action_install_cias_delete};
-static list_item delete_all_cias = {"刪除所有3DS可導入档案", COLOR_TEXT, action_delete_dir_cias};
+static list_item install_all_cias = {"安装所有安装包", COLOR_TEXT, action_install_cias};
+static list_item install_and_delete_all_cias = {"安装并删除所有安装包", COLOR_TEXT, action_install_cias_delete};
+static list_item delete_all_cias = {"删除安装包", COLOR_TEXT, action_delete_dir_cias};
 
-static list_item install_all_tickets = {"安裝所有憑據", COLOR_TEXT, action_install_tickets};
-static list_item install_and_delete_all_tickets = {"安裝並刪除所有憑據", COLOR_TEXT, action_install_tickets_delete};
-static list_item delete_all_tickets = {"刪除所有憑據", COLOR_TEXT, action_delete_dir_tickets};
+static list_item install_all_tickets = {"安装所有应用引导表", COLOR_TEXT, action_install_tickets};
+static list_item install_and_delete_all_tickets = {"安装并删除所有应用引导表", COLOR_TEXT, action_install_tickets_delete};
+static list_item delete_all_tickets = {"删除所有应用引导表", COLOR_TEXT, action_delete_dir_tickets};
 
 typedef struct {
     populate_files_data populateData;
@@ -107,9 +107,9 @@ static void files_action_update(ui_view* view, void* data, linked_list* items, l
 
             Result res = 0;
             if(R_SUCCEEDED(res = clipboard_set_contents(actionData->parent->archive, info->path, selected == &copy_all_contents))) {
-                prompt_display_notify("成功", selected == &copy_all_contents ? "當前資料夾的档案已拷貝到剪貼板上" : (info->attributes & FS_ATTRIBUTE_DIRECTORY) ? "當前資料夾已拷貝到剪貼板上" : "档案已拷貝到剪貼板上", COLOR_TEXT, info, task_draw_file_info, NULL);
+                prompt_display_notify("成功", selected == &copy_all_contents ? "当前文件夹的所有项目已复制到剪贴板." : (info->attributes & FS_ATTRIBUTE_DIRECTORY) ? "当前文件夹已复制到剪贴板." : "文件已复制到剪贴板.", COLOR_TEXT, info, task_draw_file_info, NULL);
             } else {
-                error_display_res(info, task_draw_file_info, res, "無法拷貝到剪貼板上");
+                error_display_res(info, task_draw_file_info, res, "无法复制到剪贴板.");
             }
         } else if(selected == &install_all_cias || selected == &install_and_delete_all_cias || selected == &install_all_tickets || selected == &install_and_delete_all_tickets) {
             void (*filteredAction)(linked_list*, list_item*, bool (*)(void*, const char*, u32), void*) = action;
@@ -171,7 +171,7 @@ static void files_action_update(ui_view* view, void* data, linked_list* items, l
 static void files_action_open(linked_list* items, list_item* selected, files_data* parent) {
     files_action_data* data = (files_action_data*) calloc(1, sizeof(files_action_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "無法分配档案操作數據");
+        error_display(NULL, NULL, "无法分配文件操作的数据.");
 
         return;
     }
@@ -196,7 +196,7 @@ static void files_action_open(linked_list* items, list_item* selected, files_dat
         }
     }
 
-    list_display((((file_info*) selected->data)->attributes & FS_ATTRIBUTE_DIRECTORY) ? "資料夾操作" : "档案操作", "A: 選擇, B: 返回", data, files_action_update, files_action_draw_top);
+    list_display((((file_info*) selected->data)->attributes & FS_ATTRIBUTE_DIRECTORY) ? "文件夹操作" : "文件操作", "A: 选择, B: 返回", data, files_action_update, files_action_draw_top);
 }
 
 static void files_options_add_entry(linked_list* items, const char* name, bool* val) {
@@ -238,16 +238,16 @@ static void files_options_update(ui_view* view, void* data, linked_list* items, 
     }
 
     if(linked_list_size(items) == 0) {
-        files_options_add_entry(items, "顯示隠藏档案", &listData->showHidden);
-        files_options_add_entry(items, "顯示資料夾", &listData->showDirectories);
-        files_options_add_entry(items, "顯示档案", &listData->showFiles);
-        files_options_add_entry(items, "顯示 CIAs", &listData->showCias);
-        files_options_add_entry(items, "顯示 Tickets", &listData->showTickets);
+        files_options_add_entry(items, "显示隐藏的项目", &listData->showHidden);
+        files_options_add_entry(items, "显示文件夹", &listData->showDirectories);
+        files_options_add_entry(items, "显示文件", &listData->showFiles);
+        files_options_add_entry(items, "显示安装包", &listData->showCias);
+        files_options_add_entry(items, "显示应用引导表", &listData->showTickets);
     }
 }
 
 static void files_options_open(files_data* data) {
-    list_display("選項", "A: 切換, B: 返回", data, files_options_update, NULL);
+    list_display("选项", "A: 切换, B: 返回", data, files_options_update, NULL);
 }
 
 static void files_draw_top(ui_view* view, void* data, float x1, float y1, float x2, float y2, list_item* selected) {
@@ -270,7 +270,7 @@ static void files_repopulate(files_data* listData, linked_list* items) {
 
     Result res = task_populate_files(&listData->populateData);
     if(R_FAILED(res)) {
-        error_display_res(NULL, NULL, res, "無法初始化档案目錄結構");
+        error_display_res(NULL, NULL, res, "无法启动文件列表填充.");
     }
 
     listData->populated = true;
@@ -347,7 +347,7 @@ static void files_update(ui_view* view, void* data, linked_list* items, list_ite
     if(selected != NULL && selected->data != NULL && (selectedTouched || (hidKeysDown() & KEY_A))) {
         file_info* fileInfo = (file_info*) selected->data;
 
-        if((fileInfo->attributes & FS_ATTRIBUTE_DIRECTORY) && strncmp(selected->name, "<當前資料夾>", LIST_ITEM_NAME_MAX) != 0) {
+        if((fileInfo->attributes & FS_ATTRIBUTE_DIRECTORY) && strncmp(selected->name, "<当前文件夹>", LIST_ITEM_NAME_MAX) != 0) {
             files_navigate(listData, items, fileInfo->path);
         } else {
             files_action_open(items, selected, listData);
@@ -360,7 +360,7 @@ static void files_update(ui_view* view, void* data, linked_list* items, list_ite
     }
 
     if(listData->populateData.finished && R_FAILED(listData->populateData.result)) {
-        error_display_res(NULL, NULL, listData->populateData.result, "無法列舉档案目錄");
+        error_display_res(NULL, NULL, listData->populateData.result, "无法填充文件列表.");
 
         listData->populateData.result = 0;
     }
@@ -369,7 +369,7 @@ static void files_update(ui_view* view, void* data, linked_list* items, list_ite
 void files_open(FS_ArchiveID archiveId, FS_Path archivePath) {
     files_data* data = (files_data*) calloc(1, sizeof(files_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "無法分配档案數據");
+        error_display(NULL, NULL, "无法分配文件的数据.");
 
         return;
     }
@@ -397,7 +397,7 @@ void files_open(FS_ArchiveID archiveId, FS_Path archivePath) {
     if(archivePath.data != NULL) {
         data->archivePath.data = calloc(1, data->archivePath.size);
         if(data->archivePath.data == NULL) {
-            error_display(NULL, NULL, "無法分配档案數據");
+            error_display(NULL, NULL, "无法分配文件的数据.");
 
             files_free_data(data);
             return;
@@ -412,13 +412,13 @@ void files_open(FS_ArchiveID archiveId, FS_Path archivePath) {
 
     Result res = 0;
     if(R_FAILED(res = fs_open_archive(&data->archive, archiveId, archivePath))) {
-        error_display_res(NULL, NULL, res, "無法打開档案列表存档");
+        error_display_res(NULL, NULL, res, "没有找到文件夹.");
 
         files_free_data(data);
         return;
     }
 
-    list_display("档案", "A: 選擇, B: 返回, X: 刷新, Select: 選項", data, files_update, files_draw_top);
+    list_display("文件", "A: 选择, B: 返回, X: 刷新, SELECT: 选项", data, files_update, files_draw_top);
 }
 
 static void files_open_nand_warning_onresponse(ui_view* view, void* data, u32 response) {
@@ -430,7 +430,7 @@ static void files_open_nand_warning_onresponse(ui_view* view, void* data, u32 re
 }
 
 void files_open_nand_warning(FS_ArchiveID archive) {
-    prompt_display_yes_no("確認", "修改NAND是危險的，可能會導致\n 系統無法正常運行。\n確保自己知道行為造成的後果。\n\n是否繼續？", COLOR_TEXT, (void*) archive, NULL, files_open_nand_warning_onresponse);
+    prompt_display_yes_no("确认", "修改 NAND 是危险的,\n这可能导致系统无法正常运行,\n请您确保自己知道正在做什么.\n\n继续?", COLOR_TEXT, (void*) archive, NULL, files_open_nand_warning_onresponse);
 }
 
 void files_open_sd() {
@@ -452,5 +452,3 @@ void files_open_twl_photo() {
 void files_open_twl_sound() {
     files_open(ARCHIVE_TWL_SOUND, fsMakePath(PATH_EMPTY, ""));
 }
-
-// オケー

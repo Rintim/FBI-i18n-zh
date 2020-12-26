@@ -18,18 +18,18 @@ static void action_delete_secure_value_update(ui_view* view, void* data, float* 
     info_destroy(view);
 
     if(R_FAILED(res)) {
-        error_display_res(info, task_draw_title_info, res, "無法已刪除安全值");
+        error_display_res(info, task_draw_title_info, res, "无法删除安全值.");
     } else {
-        prompt_display_notify("成功", "已刪除安全值", COLOR_TEXT, info, task_draw_title_info, NULL);
+        prompt_display_notify("成功", "已删除.", COLOR_TEXT, info, task_draw_title_info, NULL);
     }
 }
 
 static void action_delete_secure_value_onresponse(ui_view* view, void* data, u32 response) {
     if(response == PROMPT_YES) {
-        info_display("刪除安全值中", "", false, data, action_delete_secure_value_update, task_draw_title_info);
+        info_display("正在删除", "", false, data, action_delete_secure_value_update, task_draw_title_info);
     }
 }
 
 void action_delete_secure_value(linked_list* items, list_item* selected) {
-    prompt_display_yes_no("確認", "即將刪除所選程式的安全值，是否繼續？", COLOR_TEXT, selected->data, task_draw_title_info, action_delete_secure_value_onresponse);
+    prompt_display_yes_no("确认", "删除所选应用的安全值?", COLOR_TEXT, selected->data, task_draw_title_info, action_delete_secure_value_onresponse);
 }

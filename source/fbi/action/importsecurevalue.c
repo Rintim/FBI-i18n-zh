@@ -37,18 +37,18 @@ static void action_import_secure_value_update(ui_view* view, void* data, float* 
     info_destroy(view);
 
     if(R_SUCCEEDED(res)) {
-        prompt_display_notify("成功", "已導入安全值", COLOR_TEXT, info, task_draw_title_info, NULL);
+        prompt_display_notify("成功", "已导入.", COLOR_TEXT, info, task_draw_title_info, NULL);
     } else {
-        error_display_res(info, task_draw_title_info, res, "無法導入安全值");
+        error_display_res(info, task_draw_title_info, res, "无法导入安全值.");
     }
 }
 
 static void action_import_secure_value_onresponse(ui_view* view, void* data, u32 response) {
     if(response == PROMPT_YES) {
-        info_display("正在導入安全值中", "", false, data, action_import_secure_value_update, task_draw_title_info);
+        info_display("正在导入", "", false, data, action_import_secure_value_update, task_draw_title_info);
     }
 }
 
 void action_import_secure_value(linked_list* items, list_item* selected) {
-    prompt_display_yes_no("確認", "即將導入所選的安全值到所選的程式中，是否繼續？", COLOR_TEXT, selected->data, task_draw_title_info, action_import_secure_value_onresponse);
+    prompt_display_yes_no("确认", "导入安全值至所选应用?", COLOR_TEXT, selected->data, task_draw_title_info, action_import_secure_value_onresponse);
 }

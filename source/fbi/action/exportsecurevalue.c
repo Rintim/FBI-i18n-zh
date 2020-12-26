@@ -19,7 +19,7 @@ static void action_export_secure_value_update(ui_view* view, void* data, float* 
             ui_pop();
             info_destroy(view);
 
-            prompt_display_notify("失敗", "安全值未設置", COLOR_TEXT, info, task_draw_title_info, NULL);
+            prompt_display_notify("失败", "未设置安全值.", COLOR_TEXT, info, task_draw_title_info, NULL);
 
             return;
         }
@@ -53,18 +53,18 @@ static void action_export_secure_value_update(ui_view* view, void* data, float* 
     info_destroy(view);
 
     if(R_SUCCEEDED(res)) {
-        prompt_display_notify("成功", "已導出安全值", COLOR_TEXT, info, task_draw_title_info, NULL);
+        prompt_display_notify("成功", "已导出.", COLOR_TEXT, info, task_draw_title_info, NULL);
     } else {
-        error_display_res(info, task_draw_title_info, res, "無法導出安全值");
+        error_display_res(info, task_draw_title_info, res, "无法导出安全值.");
     }
 }
 
 static void action_export_secure_value_onresponse(ui_view* view, void* data, u32 response) {
     if(response == PROMPT_YES) {
-        info_display("正在導出安全值中", "", false, data, action_export_secure_value_update, task_draw_title_info);
+        info_display("正在导出", "", false, data, action_export_secure_value_update, task_draw_title_info);
     }
 }
 
 void action_export_secure_value(linked_list* items, list_item* selected) {
-    prompt_display_yes_no("確認", "即將導出所選程式的安全值，是否繼續？", COLOR_TEXT, selected->data, task_draw_title_info, action_export_secure_value_onresponse);
+    prompt_display_yes_no("确认", "导出所选应用的安全值?", COLOR_TEXT, selected->data, task_draw_title_info, action_export_secure_value_onresponse);
 }

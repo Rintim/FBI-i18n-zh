@@ -59,7 +59,7 @@ static Result action_delete_tickets_restore(void* data, u32 index) {
 }
 
 static bool action_delete_tickets_error(void* data, u32 index, Result res, ui_view** errorView) {
-    *errorView = error_display_res(data, action_delete_tickets_draw_top, res, "無法刪除憑據");
+    *errorView = error_display_res(data, action_delete_tickets_draw_top, res, "无法删除应用引导表.");
     return true;
 }
 
@@ -80,7 +80,7 @@ static void action_delete_tickets_update(ui_view* view, void* data, float* progr
         info_destroy(view);
 
         if(R_SUCCEEDED(deleteData->deleteInfo.result)) {
-            prompt_display_notify("成功", "憑據已刪除", COLOR_TEXT, NULL, NULL, NULL);
+            prompt_display_notify("成功", "已删除.", COLOR_TEXT, NULL, NULL, NULL);
         }
 
         action_delete_tickets_free_data(deleteData);
@@ -102,9 +102,9 @@ static void action_delete_tickets_onresponse(ui_view* view, void* data, u32 resp
     if(response == PROMPT_YES) {
         Result res = task_data_op(&deleteData->deleteInfo);
         if(R_SUCCEEDED(res)) {
-            info_display("正在刪除中", "按B鍵取消", true, data, action_delete_tickets_update, action_delete_tickets_draw_top);
+            info_display("正在删除", "按 B 取消.", true, data, action_delete_tickets_update, action_delete_tickets_draw_top);
         } else {
-            error_display_res(NULL, NULL, res, "無法初始化刪除操作");
+            error_display_res(NULL, NULL, res, "无法启动删除操作.");
 
             action_delete_tickets_free_data(deleteData);
         }
@@ -148,9 +148,9 @@ static void action_delete_tickets_loading_update(ui_view* view, void* data, floa
             loadingData->deleteData->deleteInfo.total = linked_list_size(&loadingData->deleteData->contents);
             loadingData->deleteData->deleteInfo.processed = loadingData->deleteData->deleteInfo.total;
 
-            prompt_display_yes_no("確認", loadingData->message, COLOR_TEXT, loadingData->deleteData, action_delete_tickets_draw_top, action_delete_tickets_onresponse);
+            prompt_display_yes_no("确认", loadingData->message, COLOR_TEXT, loadingData->deleteData, action_delete_tickets_draw_top, action_delete_tickets_onresponse);
         } else {
-            error_display_res(NULL, NULL, loadingData->popData.result, "無法列舉憑據目錄");
+            error_display_res(NULL, NULL, loadingData->popData.result, "无法填充应用引导表列表.");
 
             action_delete_tickets_free_data(loadingData->deleteData);
         }
@@ -163,13 +163,13 @@ static void action_delete_tickets_loading_update(ui_view* view, void* data, floa
         svcSignalEvent(loadingData->popData.cancelEvent);
     }
 
-    snprintf(text, PROGRESS_TEXT_MAX, "正在獲取憑據目錄中......");
+    snprintf(text, PROGRESS_TEXT_MAX, "正在获取应用引导表列表...");
 }
 
 static void action_delete_tickets_internal(linked_list* items, list_item* selected, const char* message, bool unused) {
     delete_tickets_data* data = (delete_tickets_data*) calloc(1, sizeof(delete_tickets_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "無法分配刪除數據");
+        error_display(NULL, NULL, "无法分配删除的数据.");
 
         return;
     }
@@ -195,7 +195,7 @@ static void action_delete_tickets_internal(linked_list* items, list_item* select
     if(unused) {
         delete_tickets_loading_data* loadingData = (delete_tickets_loading_data*) calloc(1, sizeof(delete_tickets_loading_data));
         if(loadingData == NULL) {
-            error_display(NULL, NULL, "無法分配讀取數據");
+            error_display(NULL, NULL, "无法分配加载的数据.");
 
             action_delete_tickets_free_data(data);
             return;
@@ -208,28 +208,28 @@ static void action_delete_tickets_internal(linked_list* items, list_item* select
 
         Result listRes = task_populate_tickets(&loadingData->popData);
         if(R_FAILED(listRes)) {
-            error_display_res(NULL, NULL, listRes, "無法初始化憑據目錄結構");
+            error_display_res(NULL, NULL, listRes, "无法启动应用引导表列表填充.");
 
             free(loadingData);
             action_delete_tickets_free_data(data);
             return;
         }
 
-        info_display("正在讀取中", "按B鍵取消", false, loadingData, action_delete_tickets_loading_update, action_delete_tickets_loading_draw_top);
+        info_display("正在加载", "按 B 取消.", false, loadingData, action_delete_tickets_loading_update, action_delete_tickets_loading_draw_top);
     } else {
         linked_list_add(&data->contents, selected);
 
         data->deleteInfo.total = 1;
         data->deleteInfo.processed = data->deleteInfo.total;
 
-        prompt_display_yes_no("確認", message, COLOR_TEXT, data, action_delete_tickets_draw_top, action_delete_tickets_onresponse);
+        prompt_display_yes_no("确认", message, COLOR_TEXT, data, action_delete_tickets_draw_top, action_delete_tickets_onresponse);
     }
 }
 
 void action_delete_ticket(linked_list* items, list_item* selected) {
-    action_delete_tickets_internal(items, selected, "即將刪除所選的憑據，是否繼續？", false);
+    action_delete_tickets_internal(items, selected, "删除所选应用引导表?", false);
 }
 
 void action_delete_tickets_unused(linked_list* items, list_item* selected) {
-    action_delete_tickets_internal(items, selected, "即將刪除所有未使用的憑據，是否繼續？", true);
+    action_delete_tickets_internal(items, selected, "删除所有未使用的应用引导表?", true);
 }

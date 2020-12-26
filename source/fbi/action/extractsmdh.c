@@ -61,18 +61,18 @@ static void action_extract_smdh_update(ui_view* view, void* data, float* progres
     info_destroy(view);
 
     if(R_SUCCEEDED(res)) {
-        prompt_display_notify("成功", "SMDH 已提取", COLOR_TEXT, info, task_draw_title_info, NULL);
+        prompt_display_notify("成功", "已提取.", COLOR_TEXT, info, task_draw_title_info, NULL);
     } else {
-        error_display_res(info, task_draw_title_info, res, "無法提取 SMDH.");
+        error_display_res(info, task_draw_title_info, res, "无法提取 SMDH.");
     }
 }
 
 static void action_extract_smdh_onresponse(ui_view* view, void* data, u32 response) {
     if(response == PROMPT_YES) {
-        info_display("正在提取 SMDH 中", "", false, data, action_extract_smdh_update, task_draw_title_info);
+        info_display("正在提取", "", false, data, action_extract_smdh_update, task_draw_title_info);
     }
 }
 
 void action_extract_smdh(linked_list* items, list_item* selected) {
-    prompt_display_yes_no("確認", "即將提取所選程式的 SMDH，是否繼續？", COLOR_TEXT, selected->data, task_draw_title_info, action_extract_smdh_onresponse);
+    prompt_display_yes_no("确认", "提取所选应用的 SMDH?", COLOR_TEXT, selected->data, task_draw_title_info, action_extract_smdh_onresponse);
 }

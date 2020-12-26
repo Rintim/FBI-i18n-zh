@@ -211,7 +211,7 @@ static Result action_paste_contents_restore(void* data, u32 index) {
 }
 
 static bool action_paste_contents_error(void* data, u32 index, Result res, ui_view** errorView) {
-    *errorView = error_display_res(data, action_paste_contents_draw_top, res, "Failed to paste content.");
+    *errorView = error_display_res(data, action_paste_contents_draw_top, res, "无法粘贴项目.");
     return true;
 }
 
@@ -240,7 +240,7 @@ static void action_paste_contents_update(ui_view* view, void* data, float* progr
         info_destroy(view);
 
         if(R_SUCCEEDED(pasteData->pasteInfo.result)) {
-            prompt_display_notify("成功", "档案以粘貼", COLOR_TEXT, NULL, NULL, NULL);
+            prompt_display_notify("成功", "已粘贴.", COLOR_TEXT, NULL, NULL, NULL);
         }
 
         action_paste_contents_free_data(pasteData);
@@ -268,9 +268,9 @@ static void action_paste_contents_onresponse(ui_view* view, void* data, u32 resp
     if(response == PROMPT_YES) {
         Result res = task_data_op(&pasteData->pasteInfo);
         if(R_SUCCEEDED(res)) {
-            info_display("正在粘貼档案中", "按B鍵取消", true, data, action_paste_contents_update, action_paste_contents_draw_top);
+            info_display("正在粘贴", "按 B 取消.", true, data, action_paste_contents_update, action_paste_contents_draw_top);
         } else {
-            error_display_res(NULL, NULL, res, "無法初始化粘貼操作");
+            error_display_res(NULL, NULL, res, "无法启动粘贴操作.");
 
             action_paste_contents_free_data(pasteData);
         }
@@ -300,9 +300,9 @@ static void action_paste_contents_loading_update(ui_view* view, void* data, floa
             loadingData->pasteData->pasteInfo.total = linked_list_size(&loadingData->pasteData->contents);
             loadingData->pasteData->pasteInfo.processed = loadingData->pasteData->pasteInfo.total;
 
-            prompt_display_yes_no("確認", "即將粘貼剪貼板档案到當前資料夾下，是否繼續？", COLOR_TEXT, loadingData->pasteData, action_paste_contents_draw_top, action_paste_contents_onresponse);
+            prompt_display_yes_no("确认", "粘贴至当前文件夹?", COLOR_TEXT, loadingData->pasteData, action_paste_contents_draw_top, action_paste_contents_onresponse);
         } else {
-            error_display_res(NULL, NULL, loadingData->popData.result, "無法列舉剪貼板档案目錄");
+            error_display_res(NULL, NULL, loadingData->popData.result, "无法启动剪贴板项目填充.");
 
             action_paste_contents_free_data(loadingData->pasteData);
         }
@@ -315,18 +315,18 @@ static void action_paste_contents_loading_update(ui_view* view, void* data, floa
         svcSignalEvent(loadingData->popData.cancelEvent);
     }
 
-    snprintf(text, PROGRESS_TEXT_MAX, "獲取剪貼板档案目錄中......");
+    snprintf(text, PROGRESS_TEXT_MAX, "正在获取剪贴板项目...");
 }
 
 void action_paste_contents(linked_list* items, list_item* selected) {
     if(!clipboard_has_contents()) {
-        prompt_display_notify("失敗", "剪貼板無档案.", COLOR_TEXT, NULL, NULL, NULL);
+        prompt_display_notify("失败", "剪贴板为空.", COLOR_TEXT, NULL, NULL, NULL);
         return;
     }
 
     paste_contents_data* data = (paste_contents_data*) calloc(1, sizeof(paste_contents_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "無法分配粘貼档案數據");
+        error_display(NULL, NULL, "无法分配粘贴项目的数据.");
 
         return;
     }
@@ -336,7 +336,7 @@ void action_paste_contents(linked_list* items, list_item* selected) {
     file_info* targetInfo = (file_info*) selected->data;
     Result targetCreateRes = task_create_file_item(&data->targetItem, targetInfo->archive, targetInfo->path, targetInfo->attributes, false);
     if(R_FAILED(targetCreateRes)) {
-        error_display_res(NULL, NULL, targetCreateRes, "無法創建目標档案");
+        error_display_res(NULL, NULL, targetCreateRes, "无法创建目标文件.");
 
         action_paste_contents_free_data(data);
         return;
@@ -374,7 +374,7 @@ void action_paste_contents(linked_list* items, list_item* selected) {
 
     paste_contents_loading_data* loadingData = (paste_contents_loading_data*) calloc(1, sizeof(paste_contents_loading_data));
     if(loadingData == NULL) {
-        error_display(NULL, NULL, "無法分配讀取數據");
+        error_display(NULL, NULL, "无法分配加载的数据.");
 
         action_paste_contents_free_data(data);
         return;
@@ -393,12 +393,12 @@ void action_paste_contents(linked_list* items, list_item* selected) {
 
     Result listRes = task_populate_files(&loadingData->popData);
     if(R_FAILED(listRes)) {
-        error_display_res(NULL, NULL, listRes, "無法初始化剪貼板档案目錄結構");
+        error_display_res(NULL, NULL, listRes, "无法启动剪贴板项目填充.");
 
         free(loadingData);
         action_paste_contents_free_data(data);
         return;
     }
 
-    info_display("正在讀期中", "按B鍵取消", false, loadingData, action_paste_contents_loading_update, action_paste_contents_loading_draw_top);
+    info_display("正在加载", "按 B 取消.", false, loadingData, action_paste_contents_loading_update, action_paste_contents_loading_draw_top);
 }

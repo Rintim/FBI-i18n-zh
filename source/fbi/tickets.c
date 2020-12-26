@@ -9,8 +9,8 @@
 #include "task/uitask.h"
 #include "../core/core.h"
 
-static list_item delete_ticket = {"刪除憑據", COLOR_TEXT, action_delete_ticket};
-static list_item delete_unused_tickets = {"刪除未使用的憑據", COLOR_TEXT, action_delete_tickets_unused};
+static list_item delete_ticket = {"删除应用引导表", COLOR_TEXT, action_delete_ticket};
+static list_item delete_unused_tickets = {"删除未使用的应用引导表", COLOR_TEXT, action_delete_tickets_unused};
 
 typedef struct {
     populate_tickets_data populateData;
@@ -61,7 +61,7 @@ static void tickets_action_update(ui_view* view, void* data, linked_list* items,
 static void tickets_action_open(linked_list* items, list_item* selected) {
     tickets_action_data* data = (tickets_action_data*) calloc(1, sizeof(tickets_action_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "無法分配憑據操作數據");
+        error_display(NULL, NULL, "无法分配应用引导表操作的数据.");
 
         return;
     }
@@ -69,7 +69,7 @@ static void tickets_action_open(linked_list* items, list_item* selected) {
     data->items = items;
     data->selected = selected;
 
-    list_display("憑據操作", "A: 選擇, B: 返回", data, tickets_action_update, tickets_action_draw_top);
+    list_display("应用引导表操作", "A: 选择, B: 返回", data, tickets_action_update, tickets_action_draw_top);
 }
 
 static void tickets_draw_top(ui_view* view, void* data, float x1, float y1, float x2, float y2, list_item* selected) {
@@ -109,14 +109,14 @@ static void tickets_update(ui_view* view, void* data, linked_list* items, list_i
         listData->populateData.items = items;
         Result res = task_populate_tickets(&listData->populateData);
         if(R_FAILED(res)) {
-            error_display_res(NULL, NULL, res, "無法初始化憑據目錄結構");
+            error_display_res(NULL, NULL, res, "无法启动应用引导表列表填充.");
         }
 
         listData->populated = true;
     }
 
     if(listData->populateData.finished && R_FAILED(listData->populateData.result)) {
-        error_display_res(NULL, NULL, listData->populateData.result, "無法列舉憑據目錄");
+        error_display_res(NULL, NULL, listData->populateData.result, "无法填充应用引导表列表.");
 
         listData->populateData.result = 0;
     }
@@ -130,14 +130,12 @@ static void tickets_update(ui_view* view, void* data, linked_list* items, list_i
 void tickets_open() {
     tickets_data* data = (tickets_data*) calloc(1, sizeof(tickets_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "無法分配憑據數據");
+        error_display(NULL, NULL, "无法分配应用引导表的数据.");
 
         return;
     }
 
     data->populateData.finished = true;
 
-    list_display("憑據", "A: 選擇, B: 返回, X: 刷新", data, tickets_update, tickets_draw_top);
+    list_display("应用引导表", "A: 选择, B: 返回, X: 刷新", data, tickets_update, tickets_draw_top);
 }
-
-// オケー
