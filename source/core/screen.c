@@ -29,6 +29,8 @@ static float font_scale;
 
 static u8 base_alpha = 0xFF;
 
+static CFNT_s* font_ttf=NULL;
+
 static u32 color_config[MAX_COLORS] = {0xFF000000};
 
 static struct {
@@ -154,7 +156,11 @@ void screen_init() {
         return;
     }
 
-    TGLP_s* glyphInfo = fontGetGlyphInfo(NULL);
+    //TGLP_s* glyphInfo = fontGetGlyphInfo(NULL);
+
+	fontFixPointers(font_ttf);
+    TGLP_s* glyphInfo = font_ttf->finf.tglp;
+    
 
     glyph_count = glyphInfo->nSheets;
     glyph_sheets = calloc(glyph_count, sizeof(C3D_Tex));
@@ -165,7 +171,8 @@ void screen_init() {
 
     for(int i = 0; i < glyph_count; i++) {
         C3D_Tex* tex = &glyph_sheets[i];
-        tex->data = fontGetGlyphSheetTex(NULL, i);
+        //tex->data = fontGetGlyphSheetTex(NULL, i);
+		tex->data = &glyphInfo->sheetData[glyphInfo->sheetSize*i];
         tex->fmt = (GPU_TEXCOLOR) glyphInfo->sheetFmt;
         tex->size = glyphInfo->sheetSize;
         tex->width = glyphInfo->sheetWidth;
@@ -508,7 +515,8 @@ void screen_draw_texture_crop(u32 id, float x, float y, float width, float heigh
 }
 
 float screen_get_font_height(float scaleY) {
-    return scaleY * fontGetInfo(NULL)->lineFeed;
+    //return scaleY * fontGetInfo(NULL)->lineFeed;
+	return scaleY * fontGetInfo(font_ttf)->lineFeed;
 }
 
 #define MAX_LINES 64
@@ -575,12 +583,14 @@ static void screen_wrap_string(u32* lines, float* lineWidths, float* lineHeights
             lastAlignPos = linePos;
         }
 
-        charWidth *= scaleX * fontGetCharWidthInfo(NULL, fontGlyphIndexFromCodePoint(NULL, code))->charWidth;
+        //charWidth *= scaleX * fontGetCharWidthInfo(NULL, fontGlyphIndexFromCodePoint(NULL, code))->charWidth;
+		charWidth *= scaleX * fontGetCharWidthInfo(font_ttf, fontGlyphIndexFromCodePoint(font_ttf, code))->charWidth;
 
         if(code == '\n' || (wordWrap && lw + charWidth >= maxWidth)) {
             if(code == '\n') {
                 linePos++;
-                lh = scaleY * fontGetInfo(NULL)->lineFeed;
+                //lh = scaleY * fontGetInfo(NULL)->lineFeed;
+				lh = scaleY * fontGetInfo(font_ttf)->lineFeed;
             }
 
             u32 oldLinePos = linePos;
@@ -617,7 +627,8 @@ static void screen_wrap_string(u32* lines, float* lineWidths, float* lineHeights
             }
 
             lw += charWidth;
-            lh = scaleY * fontGetInfo(NULL)->lineFeed;
+            //lh = scaleY * fontGetInfo(NULL)->lineFeed;
+			lh = scaleY * fontGetInfo(font_ttf)->lineFeed;
 
             linePos++;
         }
@@ -709,10 +720,11 @@ static void screen_draw_string_internal(const char* text, float x, float y, floa
                 }
 
                 fontGlyphPos_s data;
-                fontCalcGlyphPos(&data, NULL, fontGlyphIndexFromCodePoint(NULL, code), GLYPH_POS_CALC_VTXCOORD, scaleX * font_scale, scaleY * font_scale);
-
+                //fontCalcGlyphPos(&data, NULL, fontGlyphIndexFromCodePoint(NULL, code), GLYPH_POS_CALC_VTXCOORD, scaleX * font_scale, scaleY * font_scale);
+				fontCalcGlyphPos(&data, font_ttf, fontGlyphIndexFromCodePoint(font_ttf, code), GLYPH_POS_CALC_VTXCOORD, scaleX * font_scale, scaleY * font_scale);	
                 if(data.sheetIndex >= glyph_count) {
-                    fontCalcGlyphPos(&data, NULL, fontGlyphIndexFromCodePoint(NULL, 0xFFFD), GLYPH_POS_CALC_VTXCOORD, scaleX * font_scale, scaleY * font_scale);
+                    //fontCalcGlyphPos(&data, NULL, fontGlyphIndexFromCodePoint(NULL, 0xFFFD), GLYPH_POS_CALC_VTXCOORD, scaleX * font_scale, scaleY * font_scale);
+					fontCalcGlyphPos(&data, font_ttf, fontGlyphIndexFromCodePoint(font_ttf, 0xFFFD), GLYPH_POS_CALC_VTXCOORD, scaleX * font_scale, scaleY * font_scale);
                 }
 
                 if(data.sheetIndex < glyph_count && data.sheetIndex != lastSheet) {

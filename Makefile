@@ -15,14 +15,16 @@ EXTRA_OUTPUT_FILES := servefiles
 
 BUILD_FLAGS := -Wno-format-truncation
 
-VERSION_PARTS := $(subst ., ,$(shell git describe --tags --abbrev=0))
+VERSION_PARTS := 2.6.0 # $(subst ., ,$(shell git describe --tags --abbrev=0))
 
-VERSION_MAJOR := $(word 1, $(VERSION_PARTS))
-VERSION_MINOR := $(word 2, $(VERSION_PARTS))
-VERSION_MICRO := $(word 3, $(VERSION_PARTS))
+VERSION_MAJOR := 2#$(word 1, $(VERSION_PARTS))
+VERSION_MINOR := 6#$(word 2, $(VERSION_PARTS))
+VERSION_MICRO := 0#$(word 3, $(VERSION_PARTS))
 
-DESCRIPTION := 3DS開源程式管理器.
-AUTHOR := Steveice10 Rintim+OasisAkari
+CHINESE_VERSION := Build 9
+
+DESCRIPTION := 3DS开源应用管理器.
+AUTHOR := Steveice10 Theopse
 
 PRODUCT_CODE := CTR-P-CFBI
 UNIQUE_ID := 0xF8001
