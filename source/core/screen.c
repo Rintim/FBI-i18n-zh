@@ -38,6 +38,21 @@ static struct {
     u32 height;
 } textures[MAX_TEXTURES];
 
+static void FontLoad(const char* filename){
+    
+    FILE* f = fopen(filename, "rb");
+    if (!f) return ;
+    CFNT_s ret;
+    fread(&ret, 1, sizeof(CFNT_s), f);
+    font_ttf=linearAlloc(ret.fileSize);
+    if (font_ttf)
+	{
+		memcpy(font_ttf, &ret, sizeof(CFNT_s));
+		fread((u8*)(font_ttf) + sizeof(CFNT_s), 1, ret.fileSize - sizeof(CFNT_s), f);
+	}
+    fclose(f);
+}
+
 static void screen_set_blend(u32 color, bool rgb, bool alpha) {
     C3D_TexEnv* env = C3D_GetTexEnv(0);
     if(env == NULL) {
@@ -71,6 +86,8 @@ void screen_init() {
         error_panic("无法初始化 GPU.");
         return;
     }
+	
+	FontLoad("romfs:/zh_cn.bcfnt");
 
     c3d_initialized = true;
 
