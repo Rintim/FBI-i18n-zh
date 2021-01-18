@@ -431,7 +431,7 @@ void screen_get_texture_size(u32* width, u32* height, u32 id) {
 
 void screen_begin_frame() {
     if(!C3D_FrameBegin(C3D_FRAME_SYNCDRAW)) {
-        error_panic("无法启动相框.");
+        error_panic("无法启动相机.");
         return;
     }
 }

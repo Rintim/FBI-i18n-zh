@@ -7,7 +7,7 @@
 #include "section.h"
 #include "../core/core.h"
 
-static list_item sd = {"SD 卡", COLOR_TEXT, files_open_sd};
+static list_item sd = {"(Micro) SD 卡", COLOR_TEXT, files_open_sd};
 static list_item ctr_nand = {"CTR NAND", COLOR_TEXT, files_open_ctr_nand};
 static list_item twl_nand = {"TWL NAND", COLOR_TEXT, files_open_twl_nand};
 static list_item twl_photo = {"TWL 照片", COLOR_TEXT, files_open_twl_photo};
