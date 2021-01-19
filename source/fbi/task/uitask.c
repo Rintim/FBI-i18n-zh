@@ -129,14 +129,18 @@ void task_draw_file_info(ui_view* view, void* data, float x1, float y1, float x2
             needsSeparator = true;
         }
     } else {
-        infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "无");
+        infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "无/任意");
     }
 
     infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "\n");
 
     if(!(info->attributes & FS_ATTRIBUTE_DIRECTORY)) {
-        infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "大小: %.2f %s\n",
+        infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "大小: %.2f %s",
                                 ui_get_display_size(info->size), ui_get_display_size_units(info->size));
+		
+		infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, " (%.2f %s)\n",
+			ui_get_display_size(info->ciaInfo.installedSize),
+            ui_get_display_size_units(info->ciaInfo.installedSize));
 
         if(info->isCia && info->ciaInfo.loaded) {
             char regionString[64];
@@ -152,13 +156,11 @@ void task_draw_file_info(ui_view* view, void* data, float x1, float y1, float x2
             infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos,
                                     "应用 ID: %016llX\n"
                                             "版本: %hu (%d.%d.%d)\n"
-                                            "区域: %s\n"
-                                            "安装后大小: %.2f %s",
+                                            "区域: %s",
+                                            //"安装后大小: %.2f %s",
                                     info->ciaInfo.titleId,
                                     info->ciaInfo.version, (info->ciaInfo.version >> 10) & 0x3F, (info->ciaInfo.version >> 4) & 0x3F, info->ciaInfo.version & 0xF,
-                                    regionString,
-                                    ui_get_display_size(info->ciaInfo.installedSize),
-                                    ui_get_display_size_units(info->ciaInfo.installedSize));
+                                    regionString);
         } else if(info->isTicket && info->ticketInfo.loaded) {
             infoTextPos += snprintf(infoText + infoTextPos, sizeof(infoText) - infoTextPos, "应用 ID: %016llX", info->ticketInfo.titleId);
         }

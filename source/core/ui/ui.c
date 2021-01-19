@@ -150,7 +150,7 @@ static void ui_draw_top(ui_view* ui) {
     screen_set_base_alpha(ui_fade_alpha);
 
     char verText[64];
-    snprintf(verText, 64, "Ver. %d.%d.%dC9", VERSION_MAJOR, VERSION_MINOR, VERSION_MICRO);
+    snprintf(verText, 64, "版本 %d.%d.%dC10", VERSION_MAJOR, VERSION_MINOR, VERSION_MICRO);
 
     float verWidth;
     float verHeight;
@@ -224,7 +224,7 @@ static void ui_draw_top(ui_view* ui) {
             }
 
             u64 size = (u64) resource.freeClusters * (u64) resource.clusterSize;
-            snprintf(currBuffer, sizeof(ui_free_space_buffer) - (currBuffer - ui_free_space_buffer), "CTR NAND: %.1f %s",
+            snprintf(currBuffer, sizeof(ui_free_space_buffer) - (currBuffer - ui_free_space_buffer), "3DS 分区: %.1f %s",
                      ui_get_display_size(size), ui_get_display_size_units(size));
             currBuffer += strlen(currBuffer);
         }
@@ -236,7 +236,7 @@ static void ui_draw_top(ui_view* ui) {
             }
 
             u64 size = (u64) resource.freeClusters * (u64) resource.clusterSize;
-            snprintf(currBuffer, sizeof(ui_free_space_buffer) - (currBuffer - ui_free_space_buffer), "TWL NAND: %.1f %s",
+            snprintf(currBuffer, sizeof(ui_free_space_buffer) - (currBuffer - ui_free_space_buffer), "DSi 分区: %.1f %s",
                      ui_get_display_size(size), ui_get_display_size_units(size));
             currBuffer += strlen(currBuffer);
         }
@@ -248,7 +248,7 @@ static void ui_draw_top(ui_view* ui) {
             }
 
             u64 size = (u64) resource.freeClusters * (u64) resource.clusterSize;
-            snprintf(currBuffer, sizeof(ui_free_space_buffer) - (currBuffer - ui_free_space_buffer), "TWL 照片: %.1f %s",
+            snprintf(currBuffer, sizeof(ui_free_space_buffer) - (currBuffer - ui_free_space_buffer), "DSi 照片区: %.1f %s",
                      ui_get_display_size(size), ui_get_display_size_units(size));
             currBuffer += strlen(currBuffer);
         }

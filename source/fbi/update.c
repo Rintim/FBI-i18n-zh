@@ -12,6 +12,12 @@
 #include "../core/core.h"
 
 static void update_check_update(ui_view* view, void* data, float* progress, char* text) {
+	ui_pop();
+    info_destroy(view);
+	prompt_display_notify("检查更新", "测试/滚动版不支持检查更新\n仅预览版及稳定版支持更新至最新版本.", COLOR_TEXT, NULL, NULL, NULL);
+	return;
+
+
     bool hasUpdate = false;
     char updateURL[DOWNLOAD_URL_MAX];
 
