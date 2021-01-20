@@ -26,7 +26,7 @@ void smdh_region_to_string(char* out, u32 region, size_t size) {
     if(region == 0) {
         snprintf(out, size, "未知");
     } else if((region & SMDH_ALL_REGIONS) == SMDH_ALL_REGIONS) {
-        snprintf(out, size, "无");
+        snprintf(out, size, "无/任意");
     } else {
         size_t pos = 0;
 
