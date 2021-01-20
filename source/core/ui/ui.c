@@ -158,8 +158,16 @@ static void ui_draw_top(ui_view* ui) {
     screen_draw_string(verText, topScreenTopBarX + 2, topScreenTopBarY + (topScreenTopBarHeight - verHeight) / 2, 0.5f, 0.5f, COLOR_TEXT, true);
 
     time_t t = time(NULL);
-    char* timeText = ctime(&t);
-    timeText[strlen(timeText) - 1] = '\0';
+
+
+    //char* timeText = ctime(&t);
+	char timeText[160];
+	struct tm * timeinfo;
+	timeinfo = localtime(&t);
+	strftime(timeText,160,"%Y/%m/%d %H:%M:%S\0",timeinfo);
+
+
+    //timeText[strlen(timeText) - 1] = '\0';
 
     float timeTextWidth;
     float timeTextHeight;
