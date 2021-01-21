@@ -150,7 +150,7 @@ static void ui_draw_top(ui_view* ui) {
     screen_set_base_alpha(ui_fade_alpha);
 
     char verText[64];
-    snprintf(verText, 64, "版本 %d.%d.%dC10", VERSION_MAJOR, VERSION_MINOR, VERSION_MICRO);
+    snprintf(verText, 64, "版本 %d.%d.%d", VERSION_MAJOR, VERSION_MINOR, VERSION_MICRO);
 
     float verWidth;
     float verHeight;
@@ -161,13 +161,25 @@ static void ui_draw_top(ui_view* ui) {
 
 
     //char* timeText = ctime(&t);
-	char timeText[160];
-	struct tm * timeinfo;
-	timeinfo = localtime(&t);
-	strftime(timeText,160,"%Y/%m/%d %H:%M:%S\0",timeinfo);
+	char otimeText[20];
+	struct tm * timeinfo = localtime(&t);
+	strftime(otimeText, 20, "%Y/%m/%d %H:%M:%S",timeinfo);
 
+	char weekInfo[7];
+	strftime(weekInfo, 7, "%a",timeinfo);
 
-    //timeText[strlen(timeText) - 1] = '\0';
+	if (strcmp(weekInfo, "Mon") == 0) snprintf(weekInfo, 7, "周一");
+	if (strcmp(weekInfo, "Tue") == 0) snprintf(weekInfo, 7, "周二");
+	if (strcmp(weekInfo, "Wed") == 0) snprintf(weekInfo, 7, "周三");
+	if (strcmp(weekInfo, "Thu") == 0) snprintf(weekInfo, 7, "周四");
+	if (strcmp(weekInfo, "Fri") == 0) snprintf(weekInfo, 7, "周五");
+	if (strcmp(weekInfo, "Sat") == 0) snprintf(weekInfo, 7, "周六");
+	if (strcmp(weekInfo, "Sun") == 0) snprintf(weekInfo, 7, "周日");
+
+	char timeText[28];
+	snprintf(timeText, 28, "%s %s", otimeText, weekInfo);
+	
+    timeText[27] = '\0';
 
     float timeTextWidth;
     float timeTextHeight;

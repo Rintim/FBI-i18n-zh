@@ -12,10 +12,10 @@
 #include "../core/core.h"
 
 static void update_check_update(ui_view* view, void* data, float* progress, char* text) {
-	ui_pop();
-    info_destroy(view);
-	prompt_display_notify("检查更新", "测试/滚动版不支持检查更新\n仅预览版及稳定版支持更新至最新版本.", COLOR_TEXT, NULL, NULL, NULL);
-	return;
+	//ui_pop();
+    //info_destroy(view);
+	//prompt_display_notify("检查更新", "测试/滚动版不支持检查更新\n仅预览版及稳定版支持更新至最新版本.", COLOR_TEXT, NULL, NULL, NULL);
+	//return;
 
 
     bool hasUpdate = false;
@@ -24,7 +24,7 @@ static void update_check_update(ui_view* view, void* data, float* progress, char
     Result res = 0;
 
     json_t* json = NULL;
-    if(R_SUCCEEDED(res = http_download_json(/*"https://api.github.com/repos/Theopse/fbi-i18n-zh-cn/releases/latest"*/ "https://null", &json, 16 * 1024))) {
+    if(R_SUCCEEDED(res = http_download_json("https://api.github.com/repos/Theopse/FBI-i18n-zh/releases/latest" /*"https://null"*/, &json, 16 * 1024))) {
         if(json_is_object(json)) {
             json_t* name = json_object_get(json, "name");
             json_t* assets = json_object_get(json, "assets");

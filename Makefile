@@ -15,13 +15,13 @@ EXTRA_OUTPUT_FILES := servefiles
 
 BUILD_FLAGS := -Wno-format-truncation
 
-VERSION_PARTS := 2.6.0 # $(subst ., ,$(shell git describe --tags --abbrev=0))
+VERSION_PARTS := 2.6.1 # $(subst ., ,$(shell git describe --tags --abbrev=0))
 
 VERSION_MAJOR := 2#$(word 1, $(VERSION_PARTS))
 VERSION_MINOR := 6#$(word 2, $(VERSION_PARTS))
-VERSION_MICRO := 0#$(word 3, $(VERSION_PARTS))
+VERSION_MICRO := 1#$(word 3, $(VERSION_PARTS))
 
-CHINESE_VERSION := Build 10
+CHINESE_VERSION := CV1
 
 DESCRIPTION := 3DS开源应用管理器.
 AUTHOR := Steveice10 + Theopse(汉化)

@@ -779,7 +779,7 @@ ui_view* error_display_errno(void* data, void (*drawTop)(ui_view* view, void* da
         err = -err;
     }
 
-    snprintf(errorData->fullText, 4096, "%s\nI/O Error: %s (%d)", textBuf, strerror(err), err);
+    snprintf(errorData->fullText, 4096, "%s\nI/O 错误: %s (%d)", textBuf, strerror(err), err);
 
     return prompt_display_notify("错误", errorData->fullText, COLOR_TEXT, errorData, error_draw_top, error_onresponse);
 }

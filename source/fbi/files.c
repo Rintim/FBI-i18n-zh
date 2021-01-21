@@ -430,7 +430,7 @@ static void files_open_nand_warning_onresponse(ui_view* view, void* data, u32 re
 }
 
 void files_open_nand_warning(FS_ArchiveID archive) {
-    prompt_display_yes_no("确认", "修改 NAND 是危险的,\n这可能导致系统无法正常运行,\n请您确保自己知道正在做什么.\n\n继续?", COLOR_TEXT, (void*) archive, NULL, files_open_nand_warning_onresponse);
+    prompt_display_yes_no("确认", "修改 系统闪存分区 (NAND) 是危险的,\n这可能导致系统无法正常运行,\n请您确保自己知道正在做什么.\n\n继续?", COLOR_TEXT, (void*) archive, NULL, files_open_nand_warning_onresponse);
 }
 
 void files_open_sd() {
